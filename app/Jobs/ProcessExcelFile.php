@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\ExcelFile;
 use App\Imports\ImportExcelFile;
-use Excel;
+use App\Jobs\ProcessExcelEmailsByFile;
 
 class ProcessExcelFile implements ShouldQueue
 {
@@ -30,6 +30,15 @@ class ProcessExcelFile implements ShouldQueue
      */
     public function handle(): void
     {
-        \Excel::import(new ImportExcelFile($this->excelFile), public_path($this->excelFile->file_path));
+        if ($this->excelFile->is_pending) {
+
+            $this->excelFile->update([
+                'status' => 'progress'
+            ]);
+
+            \Excel::import(new ImportExcelFile($this->excelFile), public_path($this->excelFile->file_path));
+
+            ProcessExcelEmailsByFile::dispatch($this->excelFile);
+        }
     }
 }

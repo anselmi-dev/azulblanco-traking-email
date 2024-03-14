@@ -40,6 +40,13 @@
             </div>
         </div>
         <div class="mt-5 flex lg:ml-4 lg:mt-0">
+
+            @if ($file->is_pending)
+                <x-button type="button" wire:click="dispatchFile" spinner>
+                    Procesar
+                </x-button>
+            @endif
+
             <span class="sm:ml-3">
                 <a href="{{ $file->file_path }}" target="__blank"
                     class="inline-flex items-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">

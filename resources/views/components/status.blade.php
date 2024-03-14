@@ -1,10 +1,10 @@
 @props(['status'])
 
 @php
-    $color = 'blue';
+    $color = 'indigo';
     switch ($status) {
         case 'done':
-            $color = 'indigo';
+            $color = 'green';
             break;
         case 'pending':
             $color = 'yellow';

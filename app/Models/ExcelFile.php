@@ -82,6 +82,11 @@ class ExcelFile extends Model
         return Storage::disk($this->DISK)->get($this->file);
     }
 
+    public function getIsPendingAttribute() : bool
+    {
+        return $this->status === 'pending';
+    }
+
     public function getStatusLabelAttribute()
     {
         return __('status:'.$this->status);

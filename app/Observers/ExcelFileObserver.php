@@ -4,7 +4,6 @@ namespace App\Observers;
 
 use App\Models\ExcelFile;
 use App\Jobs\ProcessExcelFile;
-use App\Jobs\ProcessExcelEmailsByFile;
 
 class ExcelFileObserver
 {
@@ -14,8 +13,6 @@ class ExcelFileObserver
     public function created(ExcelFile $excelFile): void
     {
         ProcessExcelFile::dispatch($excelFile);
-
-        ProcessExcelEmailsByFile::dispatch($excelFile);
     }
 
     /**
