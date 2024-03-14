@@ -36,6 +36,15 @@
                                 </p>
                             </div>
                         </div>
+                        <div class="flex shrink-0 gap-x-4">
+                            <div class="flex flex-col flex-start justify-start items-start">
+                                <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center" >
+                                    <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
+                                    <span class="mr-1">Emails enviados: </span> <span
+                                        class="bg-gray-100 rounded px-1">{{ $file->emails->count() }}</span>
+                                </p>
+                            </div>
+                        </div>
                         <div class="flex shrink-0 items-center gap-x-4">
                             <div class="hidden sm:flex sm:flex-col sm:items-end">
                                 <div class="text-sm leading-6 text-gray-900 flex items-center">

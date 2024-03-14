@@ -14,7 +14,8 @@
                 <p class="mt-1 flex text-base leading-5 text-gray-500">
                     {{-- <x-icon name="user-circle" class="h-5 w-5 flex-none" /> --}}
                     <span class="relative truncate">
-                        {{ $email->recipient_email }}
+                        {{ $email->excel_email->email_arqui }}
+                        {{-- {{ $email->recipient_email }} --}}
                     </span>
                 </p>
             </div>
