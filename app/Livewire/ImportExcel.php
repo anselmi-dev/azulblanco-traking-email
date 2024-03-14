@@ -45,8 +45,7 @@ class ImportExcel extends Component
         }
 
         $this->notification()->success(
-            __('Profile saved'),
-            __('Your profile was successfully saved'),
+            __('El archivo se subió correctamente'),
         );
 
         $this->dispatch('refresh-excel-file-history');

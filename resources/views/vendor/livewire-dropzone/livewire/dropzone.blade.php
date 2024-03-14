@@ -10,7 +10,7 @@
     @drop.prevent="onDrop"
     class="dz-w-full dz-antialiased"
 >
-    <div class="dz-flex dz-flex-col dz-items-start dz-h-full dz-w-full _dz-max-w-2xl dz-justify-center dz-bg-white dark:dz-bg-gray-800 dark:dz-border-gray-600 dark:hover:dz-border-gray-500 dz-p-10">
+    <div class="dz-flex dz-flex-col dz-items-start dz-h-full dz-w-full _dz-max-w-2xl dz-justify-center dz-bg-white dark:dz-bg-gray-800 dark:dz-border-gray-600 dark:hover:dz-border-gray-500 | px-4 sm:px-6 lg:px-8 pt-4 pb-2">
         @if(! is_null($error))
             <div class="dz-bg-red-50 dz-p-4 dz-w-full dz-mb-4 dz-rounded dark:dz-bg-red-600">
                 <div class="dz-flex dz-gap-3 dz-items-start">
@@ -80,7 +80,6 @@
             @endif
         </div>
 
-
         @if(count($files) > 0)
             <div class="dz-flex dz-flex-wrap dz-gap-x-10 dz-gap-y-2 dz-justify-start dz-w-full dz-mt-5">
                 @foreach($files as $file)
@@ -116,48 +115,48 @@
     </div>
 
     @script
-    <script>
-        Alpine.data('dropzone', ({ _this, multiple }) => {
-            return ({
-                isDragging: false,
-                isDropped: false,
-                isLoading: false,
+        <script>
+            Alpine.data('dropzone', ({ _this, multiple }) => {
+                return ({
+                    isDragging: false,
+                    isDropped: false,
+                    isLoading: false,
 
-                onDrop(e) {
-                    this.isDropped = true
-                    this.isDragging = false
+                    onDrop(e) {
+                        this.isDropped = true
+                        this.isDragging = false
 
-                    const file = multiple ? e.dataTransfer.files : e.dataTransfer.files[0]
+                        const file = multiple ? e.dataTransfer.files : e.dataTransfer.files[0]
 
-                    const args = ['upload', file, () => {
-                        // Upload completed
-                        this.isLoading = false
-                    }, (error) => {
-                        // An error occurred while uploading
-                        console.log('livewire-dropzone upload error', error);
-                    }, () => {
-                        // Uploading is in progress
-                        this.isLoading = true
-                    }];
+                        const args = ['upload', file, () => {
+                            // Upload completed
+                            this.isLoading = false
+                        }, (error) => {
+                            // An error occurred while uploading
+                            console.log('livewire-dropzone upload error', error);
+                        }, () => {
+                            // Uploading is in progress
+                            this.isLoading = true
+                        }];
 
-                    // Upload file(s)
-                    multiple ? _this.uploadMultiple(...args) : _this.upload(...args)
-                },
-                onDragenter() {
-                    this.isDragging = true
-                },
-                onDragleave() {
-                    this.isDragging = false
-                },
-                onDragover() {
-                    this.isDragging = true
-                },
-                removeUpload(tmpFilename) {
-                    // Dispatch an event to remove the temporarily uploaded file
-                    _this.dispatch('{{ $uuid }}:fileRemoved', { tmpFilename })
-                },
-            });
-        })
-    </script>
+                        // Upload file(s)
+                        multiple ? _this.uploadMultiple(...args) : _this.upload(...args)
+                    },
+                    onDragenter() {
+                        this.isDragging = true
+                    },
+                    onDragleave() {
+                        this.isDragging = false
+                    },
+                    onDragover() {
+                        this.isDragging = true
+                    },
+                    removeUpload(tmpFilename) {
+                        // Dispatch an event to remove the temporarily uploaded file
+                        _this.dispatch('{{ $uuid }}:fileRemoved', { tmpFilename })
+                    },
+                });
+            })
+        </script>
     @endscript
 </div>

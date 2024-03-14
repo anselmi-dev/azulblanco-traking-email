@@ -16,7 +16,8 @@ class ExcelEmail extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'email_arqui',
+        'email',
+        'role',
         'num_obra',
         'obra',
         'dir_obra',

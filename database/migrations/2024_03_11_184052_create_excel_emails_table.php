@@ -33,7 +33,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('excel_file_id');
             $table->foreign('excel_file_id')->references('id')->on('excel_files')->onDelete('cascade');
-            $table->string('email_arqui');
+            $table->string('email');
+            $table->string('role');
             $table->string('num_obra');
             $table->string('obra');
             $table->string('dir_obra');

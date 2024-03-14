@@ -14,38 +14,51 @@
         <ul role="list" class="divide-y divide-gray-100 bg-white rounded">
             @foreach ($files as $file)
                 <li class="w-full">
-                    <div class="relative flex justify-between gap-x-6 py-5 px-5">
-                        <div class="flex min-w-0 gap-x-2">
-                            <x-icon name="document-text" class="h-12 w-12 flex-none text-gray-400" />
-                            <div class="min-w-0 flex-auto">
-                                <p class="text-base font-semibold leading-6 text-gray-900">
-                                    <a href="{{ $file->file_path }}" target="__blank" class="text-indigo-500">
+                    <div class="relative flex justify-between gap-x-2 py-5 px-5">
+                        <div class="relative flex flex-wrap justify-between gap-2 flex-1">
+                            <div class="flex sm:flex-1 min-w-0 gap-x-2">
+                                <x-icon name="document-text" class="h-12 w-12 flex-none text-gray-400 hidden sm:flex" />
+                                <div class="min-w-0 flex-auto">
+                                    <p class="text-base font-semibold leading-6 text-gray-900">
+                                        <a href="{{ $file->file_path }}" target="__blank" class="text-indigo-500">
+                                            <span class="flex items-center">
+                                                <x-icon name="download" class="h-5 w-5 flex-none" />
+                                                {{ $file->original_name }}
+                                            </span>
+                                        </a>
+                                    </p>
+                                    <p class="mt-1 flex text-base leading-5 text-gray-500">
                                         <span class="flex items-center">
-                                            <x-icon name="download" class="h-5 w-5 flex-none" />
-                                            {{ $file->original_name }}
+                                            <x-icon name="user-circle" class="w-4 h-4 mr-1"></x-icon>
+                                            <span class="relative truncate">
+                                                {{ optional($file->user)->name }}
+                                            </span>
                                         </span>
-                                    </a>
-                                </p>
-                                <p class="mt-1 flex text-base leading-5 text-gray-500">
-                                    <span class="flex items-center">
-                                        <x-icon name="user-circle" class="w-4 h-4 mr-1"></x-icon>
-                                        <span class="relative truncate">
-                                            {{ optional($file->user)->name }}
-                                        </span>
-                                    </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex sm:flex-1 min-w-0 gap-x-2">
+                                <div class="flex flex-col flex-start justify-start items-start">
+                                    <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center" >
+                                        <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
+                                        <span class="mr-1 hidden sm:flex">Emails enviados: </span> <span
+                                            class="bg-gray-100 rounded px-1">{{ $file->emails->count() }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex sm:hidden flex-col sm:items-end">
+                                <div class="text-sm leading-6 text-gray-900 flex items-center">
+                                    <x-status class="text-sm leading-6 text-gray-900" status="{{ $file->status }}">
+                                        {{ $file->status_label }}
+                                    </x-status>
+                                </div>
+                                <p class="mt-1 text-xs leading-5 text-gray-500">
+                                    Creado el
+                                    <time datetime="2023-01-23T13:23Z">{{ $file->created_at->format('Y-m-d h:i') }}</time>
                                 </p>
                             </div>
                         </div>
-                        <div class="flex shrink-0 gap-x-4">
-                            <div class="flex flex-col flex-start justify-start items-start">
-                                <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center" >
-                                    <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
-                                    <span class="mr-1">Emails enviados: </span> <span
-                                        class="bg-gray-100 rounded px-1">{{ $file->emails->count() }}</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flex shrink-0 items-center gap-x-4">
+                        <div class="flex shrink-0 gap-x-2">
                             <div class="hidden sm:flex sm:flex-col sm:items-end">
                                 <div class="text-sm leading-6 text-gray-900 flex items-center">
                                     <x-status class="text-sm leading-6 text-gray-900" status="{{ $file->status }}">
@@ -67,7 +80,6 @@
                             </a>
                         </div>
                     </div>
-
                 </li>
             @endforeach
         </ul>

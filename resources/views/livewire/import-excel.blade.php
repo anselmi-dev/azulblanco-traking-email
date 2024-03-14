@@ -1,19 +1,20 @@
-<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pt-5">
+<div class="max-w-7xl mx-auto px-6 lg:px-8 pt-5">
     <x-breadcrumbs.container>
         <x-breadcrumbs.item href="{{ route('dashboard') }}">
             Dashboard
         </x-breadcrumbs.item>
     </x-breadcrumbs.container>
-    <div class="py-12 w-full">
+
+    <div class="py-10 w-full">
         <form wire:submit.prevent="submit" class="relative">
             <div class="max-w-7xl mx-auto">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                     <livewire:dropzone wire:model="files" :rules="['mimes:xls,xlsx', 'max:10420']" :multiple="false" class="w-full" />
-                    <div class="sm:px-6 lg:px-8 w-full">
+                    <div class="px-4 sm:px-6 lg:px-8 w-full">
                         <x-errors />
                         <div class="w-full border-t border-gray-1 mt-2 pt-2 justify-between flex pb-4">
                             <x-button href="{{ asset('files/template.xls') }}" dark right-icon="download" target="__blank">
-                                {{ __('Descargar plantilla') }}
+                                <span class="hidden sm:flex">{{ __('Descargar plantilla') }}</span>
                             </x-button>
 
                             <x-button primary right-icon="check" spinner type="submit">
