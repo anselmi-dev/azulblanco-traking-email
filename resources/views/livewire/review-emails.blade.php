@@ -22,7 +22,7 @@
     <ul role="list" class="divide-y divide-gray-100 bg-white rounded">
         @forelse ($emails as $email)
             <li class="w-full">
-                <x-cards.excel-email :email="$email"></x-cards.excel-email>
+                <x-cards.excel-email :email="$email" :key="$email->id"></x-cards.excel-email>
             </li>
         @empty
             <li class="relative flex justify-between gap-x-6 py-5 px-5">

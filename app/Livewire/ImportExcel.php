@@ -30,8 +30,6 @@ class ImportExcel extends Component
 
     public function submit()
     {
-        $this->dispatch('refresh-excel-file-history');
-
         $this->validate();
 
         foreach ($this->files as $key => $file) {

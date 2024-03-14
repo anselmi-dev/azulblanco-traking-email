@@ -31,7 +31,6 @@ class ProcessExcelEmailsByFile implements ShouldQueue
 
         foreach ($excel_emails as $key => $excel_email) {
             try {
-                // $excel_email->email_arqui
                 \Mail::to('carlosanselmi2@gmail.com')->send(new \App\Mail\PrivateShipped($excel_email));
 
                 $excel_email->status = 'done';

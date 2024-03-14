@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Models\ExcelEmail;
 use App\Models\ExcelFile;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -19,9 +20,9 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithValidation
 
     public function model(array $row)
     {
-        if (optional($row)['email_arqui'] && (!$this->only_private || optional($row)['tipo_promo'] == 'Privado')) {
+        if ($this->validation($row)) {
             return $this->excelFile->excel_emails()->create([
-                'email_arqui' => optional($row)['email_arqui'],
+                'email_arqui' => trim($row['email_arqui']),
                 'num_obra' => optional($row)['num_obra'],
                 'obra' => optional($row)['obra'],
                 'dir_obra' => optional($row)['dir_obra'],
@@ -33,6 +34,17 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithValidation
         }
 
         $this->skips_rows++;
+    }
+
+    public function validation ($row)
+    {
+        if (is_null(optional($row)['email_arqui']))
+            return false;
+
+        if (!(!$this->only_private || (isset($row['tipo_promo']) && $row['tipo_promo'] == 'Privado')))
+            return false;
+
+        return !ExcelEmail::where('email_arqui', trim($row['email_arqui']))->exists();
     }
 
     public function headingRow(): int
