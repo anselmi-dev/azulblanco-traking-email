@@ -11,9 +11,6 @@ use Maatwebsite\Excel\Concerns\WithValidation;
 
 class ImportExcelFile implements ToModel, WithHeadingRow
 {
-
-    protected $skips_rows = 0;
-
     public function  __construct(
         public ExcelFile $excelFile,
         protected bool $only_private = true
@@ -30,20 +27,13 @@ class ImportExcelFile implements ToModel, WithHeadingRow
 
             if ($row['email_const'])
                 $this->createExcelEmail($row['email_const'], 'CONSTRUCTOR', $row);
-
-            return;
         }
-
-        $this->skips_rows++;
 
         return;
     }
 
     protected function validation ($row) : bool
     {
-        if (is_null(optional($row)['email_arqui']))
-            return false;
-
         if (!(!$this->only_private || (isset($row['tipo_promo']) && $row['tipo_promo'] == 'Privado')))
             return false;
 
