@@ -34,7 +34,7 @@ class ImportExcelFile implements ToModel, WithHeadingRow
 
     protected function validation ($row) : bool
     {
-        if (!(!$this->only_private || (isset($row['tipo_promo']) && $row['tipo_promo'] == 'Privado')))
+        if (!(!$this->only_private || strtoupper($row['tipo_promo']) == 'PRIVADO'))
             return false;
 
         if (!Str::contains(strtoupper($row['obra']), ['VIVIENDA', 'RESIDENCIA', 'UNIFAMILIAR', 'HOTEL']))
