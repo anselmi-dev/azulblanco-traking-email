@@ -60,7 +60,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('excel_files');
         Schema::dropIfExists('excel_emails');
+        Schema::dropIfExists('excel_files');
     }
 };
