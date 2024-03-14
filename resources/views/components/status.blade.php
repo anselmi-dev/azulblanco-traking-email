@@ -1,6 +1,11 @@
 @props(['status'])
 
 @php
+    // bg-indigo-500 bg-indigo-500/20
+    // bg-green-500 bg-green-500/20
+    // bg-yellow-500 bg-yellow-500/20
+    // bg-red-500 bg-red-500/20
+
     $color = 'indigo';
     switch ($status) {
         case 'done':

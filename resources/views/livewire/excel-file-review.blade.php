@@ -21,7 +21,7 @@
                 </div>
                 <div class="mt-2 flex items-center text-sm text-gray-600">
                     <x-icon name="mail" class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"></x-icon>
-                    Emails ({{ $emails->count() }})
+                    Emails ({{ $excel_emails->count() }})
                 </div>
                 <div class="mt-2 flex items-center text-sm text-gray-600">
                     <x-status class="text-sm leading-6 text-gray-900" status="{{ $file->status }}">
@@ -57,19 +57,25 @@
         </div>
     </div>
 
-    <div class="w-full text-2xl mb-2">
-        <span class="flex items-center text-gray-500">
-            Correos enviados
-        </span>
-        <p class="text-base text-gray-500">
-            Visualización de cada una de los envios de correos que fueron realizados por el archivo XLSX.
-        </p>
+    <div class="w-full text-xl mb-2 border-gray-200 border-b pb-1 | flex items-start justify-between">
+        <div class="flex-1">
+            <span class="flex items-center text-gray-800">
+                Correos enviados
+            </span>
+            <p class="text-base text-gray-500">
+                Visualización de cada una de los envios de correos que fueron realizados por el archivo XLSX.
+            </p>
+        </div>
+{{--
+        <x-button type="button" wire:click="dispatchEmails" spinner>
+            Enviar correos pendientes
+        </x-button> --}}
     </div>
 
     <ul role="list" class="divide-y divide-gray-100 bg-white rounded">
-        @forelse ($emails as $email)
+        @forelse ($excel_emails as $excel_email)
             <li class="w-full">
-                <x-cards.excel-email :$email :key="$email->id"></x-cards.excel-email>
+                <x-cards.excel-email :$excel_email :key="$excel_email->id"></x-cards.excel-email>
             </li>
         @empty
             <li class="relative flex justify-between gap-x-6 py-5 px-5">
@@ -89,6 +95,6 @@
     </ul>
 
     <div class="w-full mt-5">
-        {{ $emails->links() }}
+        {{ $excel_emails->links() }}
     </div>
 </div>

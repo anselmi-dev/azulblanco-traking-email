@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\ExcelEmail;
 use Livewire\Component;
 use App\Models\OwnEmailSentModel;
 use Livewire\WithPagination;
@@ -13,7 +14,7 @@ class ReviewEmails extends Component
     public function render()
     {
         return view('livewire.review-emails', [
-            'emails' => OwnEmailSentModel::orderByDesc('id')->paginate(20)
+            'excel_emails' => ExcelEmail::with('own_email')->orderByDesc('id')->paginate(20)
         ])->layout('layouts.app');
     }
 }

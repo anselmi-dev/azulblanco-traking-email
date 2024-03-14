@@ -9,7 +9,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\ExcelFile;
 use App\Imports\ImportExcelFile;
-use App\Jobs\ProcessExcelEmailsByFile;
 
 class ProcessExcelFile implements ShouldQueue
 {
@@ -37,8 +36,6 @@ class ProcessExcelFile implements ShouldQueue
             ]);
 
             \Excel::import(new ImportExcelFile($this->excelFile), public_path($this->excelFile->file_path));
-
-            ProcessExcelEmailsByFile::dispatch($this->excelFile);
         }
     }
 }

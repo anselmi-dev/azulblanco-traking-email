@@ -44,6 +44,14 @@ class ExcelEmail extends Model
         return $this->belongsTo(ExcelFile::class);
     }
 
+    /**
+     * Get the user that owns the excel_email.
+     */
+    public function own_email(): BelongsTo
+    {
+        return $this->belongsTo(OwnEmailSentModel::class, 'id', 'excel_email_id');
+    }
+
     public function getStatusLabelAttribute()
     {
         return __('status:email:'.$this->status);

@@ -20,9 +20,9 @@
     </div>
 
     <ul role="list" class="divide-y divide-gray-100 bg-white rounded">
-        @forelse ($emails as $email)
+        @forelse ($excel_emails as $excel_email)
             <li class="w-full">
-                <x-cards.excel-email :email="$email" :key="$email->id"></x-cards.excel-email>
+                <x-cards.excel-email :$excel_email :key="$excel_email->id"></x-cards.excel-email>
             </li>
         @empty
             <li class="relative flex justify-between gap-x-6 py-5 px-5">
@@ -42,6 +42,6 @@
     </ul>
 
     <div class="w-full mt-5">
-        {{ $emails->links() }}
+        {{ $excel_emails->links() }}
     </div>
 </div>

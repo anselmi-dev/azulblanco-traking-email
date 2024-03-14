@@ -41,8 +41,9 @@
                                 <div class="flex flex-col flex-start justify-start items-start">
                                     <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center" >
                                         <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
-                                        <span class="mr-1 hidden sm:flex">Emails enviados: </span> <span
-                                            class="bg-gray-100 rounded px-1">{{ $file->emails->count() }}</span>
+                                        <span class="bg-gray-100 rounded px-1">
+                                            {{ $file->emails->count() }} enviados / {{ $file->excel_emails->count() }} correos
+                                        </span>
                                     </p>
                                 </div>
                             </div>

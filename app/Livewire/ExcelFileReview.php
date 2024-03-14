@@ -17,7 +17,7 @@ class ExcelFileReview extends Component
     public function render()
     {
         return view('livewire.excel-file-review', [
-            'emails' => $this->file->emails()->with('excel_email')->paginate(50)
+            'excel_emails' => $this->file->excel_emails()->with('own_email')->paginate(50)
         ])->layout('layouts.app');
     }
 

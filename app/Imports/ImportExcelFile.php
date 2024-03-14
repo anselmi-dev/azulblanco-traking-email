@@ -7,9 +7,11 @@ use App\Models\ExcelFile;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterImport;
+use App\Jobs\ProcessExcelEmailsByFile;
 
-class ImportExcelFile implements ToModel, WithHeadingRow
+class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
 {
     public function  __construct(
         public ExcelFile $excelFile,
@@ -20,13 +22,22 @@ class ImportExcelFile implements ToModel, WithHeadingRow
     {
         if ($this->validation($row)) {
             if ($row['email_promo'])
-                $this->createExcelEmail($row['email_promo'], 'PROMOTOR', $row);
+                $this->createExcelEmail([
+                    'email' => $row['email_promo'],
+                    'role' => 'PROMOTOR',
+                ], $row);
 
             if ($row['email_arqui'])
-                $this->createExcelEmail($row['email_arqui'], 'ARQUITECTO', $row);
+                $this->createExcelEmail([
+                    'email' => $row['email_arqui'],
+                    'role' => 'ARQUITECTO',
+                ], $row);
 
             if ($row['email_const'])
-                $this->createExcelEmail($row['email_const'], 'CONSTRUCTOR', $row);
+                $this->createExcelEmail([
+                    'email' => $row['email_const'],
+                    'role' => 'CONSTRUCTOR',
+                ], $row);
         }
 
         return;
@@ -45,11 +56,14 @@ class ImportExcelFile implements ToModel, WithHeadingRow
         ])->exists();
     }
 
-    protected function createExcelEmail ($email, $rol, $row)
+    protected function createExcelEmail (
+        array $sender,
+        array $row
+    )
     {
         $this->excelFile->excel_emails()->create([
-            'email' => trim($email),
-            'role' => $rol,
+            'email' => trim($sender['email']),
+            'role' => $sender['role'],
             'num_obra' => $row['num_obra'],
             'obra' => $row['obra'],
             'dir_obra' => $row['dir_obra'],
@@ -65,10 +79,15 @@ class ImportExcelFile implements ToModel, WithHeadingRow
         return 3;
     }
 
-    public function rules(): array
+    /**
+     * @return array
+     */
+    public function registerEvents(): array
     {
         return [
-            // 'email_arqui' => 'required',
+            AfterImport::class => function(AfterImport $event) {
+                ProcessExcelEmailsByFile::dispatch($this->excelFile);
+            },
         ];
     }
 }
