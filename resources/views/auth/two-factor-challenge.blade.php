@@ -48,9 +48,9 @@
                         {{ __('Use an authentication code') }}
                     </button>
 
-                    <x-button class="ms-4">
+                    <x-button-jetstream type="submit" class="ms-4">
                         {{ __('Log in') }}
-                    </x-button>
+                    </x-button-jetstream>
                 </div>
             </form>
         </div>

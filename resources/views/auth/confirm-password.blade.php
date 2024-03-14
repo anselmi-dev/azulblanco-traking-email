@@ -19,9 +19,9 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <x-button class="ms-4">
+                <x-button-jetstream type="submit" class="ms-4">
                     {{ __('Confirm') }}
-                </x-button>
+                </x-button-jetstream>
             </div>
         </form>
     </x-authentication-card>

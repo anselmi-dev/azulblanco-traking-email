@@ -39,9 +39,9 @@
                     </a>
                 @endif
 
-                <x-button type="submit" class="ms-4">
+                <x-button-jetstream type="submit" class="ms-4">
                     {{ __('Log in') }}
-                </x-button>
+                </x-button-jetstream>
             </div>
         </form>
     </x-authentication-card>

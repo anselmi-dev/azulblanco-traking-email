@@ -25,9 +25,9 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <x-button>
+                <x-button-jetstream type="submit">
                     {{ __('Email Password Reset Link') }}
-                </x-button>
+                </x-button-jetstream>
             </div>
         </form>
     </x-authentication-card>

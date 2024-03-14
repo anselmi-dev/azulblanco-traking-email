@@ -51,9 +51,9 @@
                     {{ __('Already registered?') }}
                 </a>
 
-                <x-button class="ms-4">
+                <x-button-jetstream class="ms-4">
                     {{ __('Register') }}
-                </x-button>
+                </x-button-jetstream>
             </div>
         </form>
     </x-authentication-card>
