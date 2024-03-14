@@ -13,9 +13,9 @@ class ExcelFileObserver
      */
     public function created(ExcelFile $excelFile): void
     {
-        ProcessExcelFile::dispatchSync($excelFile);
+        ProcessExcelFile::dispatch($excelFile);
 
-        ProcessExcelEmailsByFile::dispatchSync($excelFile);
+        ProcessExcelEmailsByFile::dispatch($excelFile);
     }
 
     /**
