@@ -27,10 +27,11 @@ class ProcessExcelEmailsByFile implements ShouldQueue
      */
     public function handle(): void
     {
-        $excel_emails = $this->excelFile->excel_emails;
+        $excel_emails = $this->excelFile->excel_emails()->doesntHave('own_email')->get();
 
         foreach ($excel_emails as $key => $excel_email) {
             try {
+
                 \Mail::to('carlosanselmi2@gmail.com')->send(new \App\Mail\PrivateShipped($excel_email));
 
                 $excel_email->status = 'done';

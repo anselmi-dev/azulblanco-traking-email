@@ -5,7 +5,7 @@
 @endphp
 
 <div class="w-full relative gap-x-2 py-5 px-2 md:gap-x-6 flex flex-col space-y-5" x-data="{ show: false }">
-    <div class="flex justify-between">
+    <div class="flex justify-between gap-2 md:gap-4">
         <div class="flex flex-1 min-w-0 gap-x-4">
             <div class="min-w-0 flex-auto">
                 <p class="text-base font-semibold leading-6 text-gray-600">
@@ -40,9 +40,11 @@
                             class="bg-gray-100 rounded px-1">{{ $own_email->clicks }}</span>
                     </p>
                 @else
-                    <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center">
-                        <x-icon name="cursor-click" class="h-5 w-5 flex-none mr-1" />
-                        <span>Pendiente por enviar</span>
+                    <p class="mt-1 text-xs leading-5 flex items-center">
+                        <div class="flex items-center px-1 bg-red-200 rounded">
+                            <x-icon name="fire" class="h-5 w-5 flex-none mr-1 text-red-600" />
+                            <span class="text-gray-700">Pendiente por enviar</span>
+                        </div>
                     </p>
                 @endif
 
@@ -77,6 +79,7 @@
                             <span class="font-semibold mr-1">N. OBRA:</span>
                             <span class="relative truncate">
                                 {{ $excel_email->num_obra }}
+                                __{{ $excel_email->own_email }}__
                             </span>
                         </span>
                     </p>
@@ -114,6 +117,12 @@
                             {{ $excel_email->provi_obra }}
                         </span>
                     </p>
+                    <p class="mt-1 flex text-base leading-5 text-gray-500">
+                        <span class="font-semibold mr-1">ID: </span>
+                        <span class="relative truncate">
+                            #{{ $excel_email->id }}
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -121,8 +130,8 @@
             @if ($own_email)
                 {!! $own_email->content !!}
             @else
-                <div class="text-gray-600 p-5 text-center">
-                    <p>PENDIENTE POR ENVIAR</p>
+                <div class="text-gray-600 p-5 text-center bg-yellow-50 rounded">
+                    <p>CORREO PENDIENTE POR ENVIAR</p>
                 </div>
             @endif
         </div>

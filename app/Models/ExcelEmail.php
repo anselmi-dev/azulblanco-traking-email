@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Observers\ExcelEmailObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 
+#[ObservedBy([ExcelEmailObserver::class])]
 class ExcelEmail extends Model
 {
     use HasFactory;

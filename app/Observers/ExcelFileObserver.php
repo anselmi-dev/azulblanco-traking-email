@@ -14,36 +14,4 @@ class ExcelFileObserver
     {
         ProcessExcelFile::dispatch($excelFile);
     }
-
-    /**
-     * Handle the ExcelFile "updated" event.
-     */
-    public function updated(ExcelFile $excelFile): void
-    {
-        //
-    }
-
-    /**
-     * Handle the ExcelFile "deleted" event.
-     */
-    public function deleted(ExcelFile $excelFile): void
-    {
-        //
-    }
-
-    /**
-     * Handle the ExcelFile "restored" event.
-     */
-    public function restored(ExcelFile $excelFile): void
-    {
-        //
-    }
-
-    /**
-     * Handle the ExcelFile "force deleted" event.
-     */
-    public function forceDeleted(ExcelFile $excelFile): void
-    {
-        //
-    }
 }

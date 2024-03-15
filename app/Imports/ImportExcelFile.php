@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterImport;
+use Maatwebsite\Excel\Events\ImportFailed;
 use App\Jobs\ProcessExcelEmailsByFile;
 
 class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
@@ -86,7 +87,14 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
     {
         return [
             AfterImport::class => function(AfterImport $event) {
-                ProcessExcelEmailsByFile::dispatch($this->excelFile);
+                $this->excelFile->update([
+                    'status' => 'done'
+                ]);
+            },
+            ImportFailed::class => function(ImportFailed $event) {
+                $this->excelFile->update([
+                    'status' => 'error'
+                ]);
             },
         ];
     }
