@@ -47,15 +47,15 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
                 ->first();
 
             // REGISTRO:PROMOTOR
-            if ($email_promo && is_null($excel_email->promotor_id))
+            if ($email_promo && is_null(optional($excel_email)->promotor_id))
                 $this->createExcelEmail($row, $email_promo, 'PROMOTOR');
 
             // REGISTRO:ARQUITECTO
-            if ($email_arqui && is_null($excel_email->arquitecto_id))
+            if ($email_arqui && is_null(optional($excel_email)->arquitecto_id))
                 $this->createExcelEmail($row, $email_arqui, 'ARQUITECTO');
 
             // REGISTRO:CONSTRUCTOR
-            if ($email_const && is_null($excel_email->constructor_id))
+            if ($email_const && is_null(optional($excel_email)->constructor_id))
                 $this->createExcelEmail($row, $email_const, 'CONSTRUCTOR');
         }
 
