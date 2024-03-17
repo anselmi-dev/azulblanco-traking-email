@@ -21,30 +21,55 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
 
     public function model(array $row)
     {
-        if ($this->validation($row)) {
-            if ($row['email_promo'])
-                $this->createExcelEmail([
-                    'email' => $row['email_promo'],
-                    'role' => 'PROMOTOR',
-                ], $row);
+        if ($this->validationRow($row)) {
 
-            if ($row['email_arqui'])
-                $this->createExcelEmail([
-                    'email' => $row['email_arqui'],
-                    'role' => 'ARQUITECTO',
-                ], $row);
+            $num_obra = $row['num_obra'];
 
-            if ($row['email_const'])
-                $this->createExcelEmail([
-                    'email' => $row['email_const'],
-                    'role' => 'CONSTRUCTOR',
-                ], $row);
+            $email_promo = optional($row)['email_promo'];
+
+            $email_arqui = optional($row)['email_arqui'];
+
+            $email_const = optional($row)['email_const'];
+
+            $excel_email = ExcelEmail::select('promotor.id as promotor_id', 'arquitecto.id as arquitecto_id', 'constructor.id as constructor_id')
+                ->leftJoin('excel_emails as promotor', function ($join) use ($num_obra, $email_promo) {
+                    $join->where('promotor.num_obra', $num_obra)
+                        ->where('promotor.email', $email_promo);
+                })
+                ->leftJoin('excel_emails as arquitecto', function ($join) use ($num_obra, $email_arqui) {
+                    $join->where('arquitecto.num_obra', $num_obra)
+                        ->where('arquitecto.email', $email_arqui);
+                })
+                ->leftJoin('excel_emails as constructor', function ($join) use ($num_obra, $email_const) {
+                    $join->where('constructor.num_obra', $num_obra)
+                        ->where('constructor.email', $email_const);
+                })
+                ->first();
+
+            // REGISTRO:PROMOTOR
+            if ($email_promo && is_null($excel_email->promotor_id))
+                $this->createExcelEmail($row, $email_promo, 'PROMOTOR');
+
+            // REGISTRO:ARQUITECTO
+            if ($email_arqui && is_null($excel_email->arquitecto_id))
+                $this->createExcelEmail($row, $email_arqui, 'ARQUITECTO');
+
+            // REGISTRO:CONSTRUCTOR
+            if ($email_const && is_null($excel_email->constructor_id))
+                $this->createExcelEmail($row, $email_const, 'CONSTRUCTOR');
         }
 
         return;
     }
 
-    protected function validation ($row) : bool
+    /**
+     * Validar que la linew del excel sea PRIVADO y que posee por lo menos esto string:
+     * 'VIVIENDA', 'RESIDENCIA', 'UNIFAMILIAR', 'HOTEL'
+     *
+     * @param array $row
+     * @return boolean
+     */
+    protected function validationRow ($row) : bool
     {
         if (!(!$this->only_private || strtoupper($row['tipo_promo']) == 'PRIVADO'))
             return false;
@@ -52,19 +77,21 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
         if (!Str::contains(strtoupper($row['obra']), ['VIVIENDA', 'RESIDENCIA', 'UNIFAMILIAR', 'HOTEL']))
             return false;
 
-        return !ExcelEmail::where([
-            'num_obra' => trim($row['num_obra']),
-        ])->exists();
+        return true;
     }
 
-    protected function createExcelEmail (
-        array $sender,
-        array $row
-    )
+    /**
+     * Crear registro del email, pero no envia el correo.
+     *
+     * @param array $sender
+     * @param array $row
+     * @return void
+     */
+    protected function createExcelEmail (array $row, string $name_email, string $role)
     {
         $this->excelFile->excel_emails()->create([
-            'email' => trim($sender['email']),
-            'role' => $sender['role'],
+            'email' => trim($name_email),
+            'role' => $role,
             'num_obra' => $row['num_obra'],
             'obra' => $row['obra'],
             'dir_obra' => $row['dir_obra'],
@@ -75,14 +102,6 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
         ]);
     }
 
-    public function headingRow(): int
-    {
-        return 3;
-    }
-
-    /**
-     * @return array
-     */
     public function registerEvents(): array
     {
         return [
@@ -98,4 +117,10 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
             },
         ];
     }
+
+    public function headingRow(): int
+    {
+        return 3;
+    }
+
 }

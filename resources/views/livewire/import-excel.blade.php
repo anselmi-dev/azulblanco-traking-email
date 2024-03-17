@@ -5,7 +5,7 @@
         </x-breadcrumbs.item>
     </x-breadcrumbs.container>
 
-    <div class="py-10 w-full">
+    <div class="py-5 w-full divide-y divide-gray-300">
         <form wire:submit.prevent="submit" class="relative">
             <div class="max-w-7xl mx-auto">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -27,7 +27,7 @@
             <x-loading wire:loading.class.remove="hidden" class="hidden"/>
         </form>
 
-        <div  class="max-w-7xl mx-auto mt-10 pt-10">
+        <div  class="max-w-7xl mx-auto my-10">
             <livewire:excel-file-history></livewire:excel-file-history>
         </div>
     </div>

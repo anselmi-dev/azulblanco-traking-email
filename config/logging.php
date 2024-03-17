@@ -58,6 +58,11 @@ return [
             'ignore_exceptions' => false,
         ],
 
+        'stack-telegram' => [
+            'driver' => 'stack',
+            'channels' => ['single', 'telegram'],
+        ],
+
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/laravel.log'),
@@ -126,6 +131,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'telegram' => [
+            'driver' => 'custom',
+            'via'    => Logger\TelegramLogger::class,
+            'level'  => 'debug',
+        ]
     ],
 
 ];

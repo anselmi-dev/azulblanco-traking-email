@@ -23,31 +23,14 @@
         </div>
         <div class="flex flex-1 min-w-0 gap-x-4">
             <div class="flex flex-col flex-start justify-start items-start">
-                @if ($own_email)
-                    <x-status class="text-sm leading-6 text-gray-900" status="{{ $own_email->opened_at ? 'done' : 'pending' }}">
-                        <span class="flex items-center">
-                            @if ($own_email->opened_at)
-                                <span class="mr-1">Leido el </span> {{ $own_email->opened_at->format('Y-m-d') }}
-                            @else
-                                Pendiente por leer
-                            @endif
-                        </span>
-                    </x-status>
-                    <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center"
-                        title="Enviado el: {{ $own_email->created_at->format('Y-m-d') }}">
+                <x-cards.own :own_email="$own_email"></x-cards.own>
+                {{--
+                    <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center">
                         <x-icon name="cursor-click" class="h-5 w-5 flex-none mr-1" />
-                        <span class="mr-1">Clicks</span> <span
-                            class="bg-gray-100 rounded px-1">{{ $own_email->clicks }}</span>
+                        <span class="mr-1">Clicks</span>
+                        <span class="bg-gray-100 rounded px-1">{{ $own_email->clicks }}</span>
                     </p>
-                @else
-                    <p class="mt-1 text-xs leading-5 flex items-center">
-                        <div class="flex items-center px-1 bg-red-200 rounded">
-                            <x-icon name="fire" class="h-5 w-5 flex-none mr-1 text-red-600" />
-                            <span class="text-gray-700">Pendiente por enviar</span>
-                        </div>
-                    </p>
-                @endif
-
+                --}}
             </div>
         </div>
         <div class="flex shrink-0 items-center gap-x-4">
@@ -74,12 +57,11 @@
         <div class="flex flex-wrap justify-between mb-2">
             <div class="flex min-w-0 gap-x-2">
                 <div class="min-w-0 flex-auto">
-                  <p class="text-base leading-6 text-gray-500">
+                    <p class="text-base leading-6 text-gray-500">
                         <span class="flex items-center">
                             <span class="font-semibold mr-1">N. OBRA:</span>
                             <span class="relative truncate">
                                 {{ $excel_email->num_obra }}
-                                __{{ $excel_email->own_email }}__
                             </span>
                         </span>
                     </p>

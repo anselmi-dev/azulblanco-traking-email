@@ -8,6 +8,7 @@
         "php": "^8.1",
         "codezero/laravel-localized-routes": "^3.1",
         "dasundev/livewire-dropzone": "^1.0",
+        "grkamil/laravel-telegram-logging": "^1.11",
         "guzzlehttp/guzzle": "^7.2",
         "jdavidbakr/mail-tracker": "^7.15",
         "laravel/framework": "^10.10",

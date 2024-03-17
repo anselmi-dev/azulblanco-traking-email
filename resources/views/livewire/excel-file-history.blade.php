@@ -1,7 +1,7 @@
-<div class="w-full">
-    <div class="w-full text-2xl mb-2">
+<div class="w-full bg-white divide-y divide-gray-100 rounded py-5  px-5">
+    <div class="w-full text-2xl mb-2 rounded">
         <span class="flex items-center text-gray-500">
-            <x-icon name="document-duplicate" class="h-6 w-6"></x-icon>
+            <x-icon name="clock" class="h-6 w-6"></x-icon>
             Historial de importación
         </span>
         <p class="text-base text-gray-500">
@@ -11,10 +11,10 @@
 
     <div class="relative">
         <x-loading wire:loading.class.remove="hidden" class="hidden"/>
-        <ul role="list" class="divide-y divide-gray-100 bg-white rounded">
+        <ul role="list" class="divide-y divide-gray-100">
             @foreach ($files as $file)
                 <li class="w-full">
-                    <div class="relative flex justify-between gap-x-2 py-5 px-5">
+                    <div class="relative flex justify-between gap-x-2 py-4">
                         <div class="relative flex flex-wrap justify-between gap-2 flex-1">
                             <div class="flex sm:flex-1 min-w-0 gap-x-2">
                                 <x-icon name="document-text" class="h-12 w-12 flex-none text-gray-400 hidden sm:flex" />
@@ -40,10 +40,18 @@
                             <div class="flex sm:flex-1 min-w-0 gap-x-2">
                                 <div class="flex flex-col flex-start justify-start items-start">
                                     <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center" >
-                                        <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
-                                        <span class="bg-gray-100 rounded px-1">
-                                            {{ $file->emails->count() }} enviados / {{ $file->excel_emails->count() }} correos
-                                        </span>
+                                        @if ($file->status != 'pending')
+                                            <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
+                                            <span class="bg-gray-100 rounded px-1">
+                                                {{ $file->emails->count() }} enviados / {{ $file->excel_emails->count() }} correos
+                                            </span>
+                                        @else
+                                            <svg class="animate-spin -ml-1 mr-3 h-4 w-4 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Procesando
+                                        @endif
                                     </p>
                                 </div>
                             </div>
@@ -85,7 +93,7 @@
             @endforeach
         </ul>
     </div>
-    <div class="w-full mt-5">
+    <div class="w-full pt-5">
         {{ $files->links() }}
     </div>
 </div>
