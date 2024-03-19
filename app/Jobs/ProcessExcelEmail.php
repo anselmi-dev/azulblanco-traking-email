@@ -29,7 +29,7 @@ class ProcessExcelEmail implements ShouldQueue
             if ($this->excel_email->own_email)
                 return;
 
-            $email = app()->environment('production') && settings()->get('production', false) ? $this->excel_email->email : 'carlos@infinety.es';
+            $email = app()->environment('production') && settings()->get('production', false) ? $this->excel_email->email : 'anselmi@infinety.es';
 
             \Mail::to($email)->send(new \App\Mail\PrivateShipped($this->excel_email));
 

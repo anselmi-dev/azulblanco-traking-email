@@ -25,7 +25,7 @@ class ImportExcel extends Component
 
     public bool $production = false;
 
-    public function mount ()
+    public function __construct()
     {
         $this->production = settings()->get('production', false);
     }

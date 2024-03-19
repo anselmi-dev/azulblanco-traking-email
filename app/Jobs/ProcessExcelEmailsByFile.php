@@ -35,7 +35,7 @@ class ProcessExcelEmailsByFile implements ShouldQueue
                 if ($excel_email->own_email)
                     return;
 
-                $email = app()->environment('production') && settings()->get('production', false) ? $excel_email->email : 'carlos@infinety.es';
+                $email = app()->environment('production') && settings()->get('production', false) ? $excel_email->email : 'anselmi@infinety.es';
 
                 \Mail::to($email)->send(new \App\Mail\PrivateShipped($excel_email));
 
