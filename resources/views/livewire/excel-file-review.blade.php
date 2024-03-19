@@ -9,27 +9,27 @@
     </x-breadcrumbs.container>
     <div class="py-12 w-full relative">
         <x-loading wire:loading.class.remove="hidden" class="hidden"/>
-        <div class="lg:flex lg:items-center lg:justify-between mb-10">
+        <div class="lg:flex lg:items-center lg:justify-between mb-10 text-gray-600 dark:text-white">
             <div class="min-w-0 flex-1">
                 <h2
-                    class="text-2xl font-bold leading-7 text-gray-600 sm:truncate sm:text-3xl sm:tracking-tight truncate">
+                    class="text-2xl font-bold leading-7 sm:truncate sm:text-3xl sm:tracking-tight truncate">
                     # 00{{ $file->id }} - {{ $file->original_name }}
                 </h2>
                 <div class="mt-1 flex sm:mt-0 flex-wrap space-x-4 sm:space-x-6">
-                    <div class="mt-2 flex items-center text-sm text-gray-600">
+                    <div class="mt-2 flex items-center text-sm">
                         <x-icon name="user-circle" class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"></x-icon>
                         {{ optional($file->user)->name }}
                     </div>
-                    <div class="mt-2 flex items-center text-sm text-gray-600">
+                    <div class="mt-2 flex items-center text-sm">
                         <x-icon name="mail" class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"></x-icon>
                         Emails ({{ $excel_emails->count() }})
                     </div>
-                    <div class="mt-2 flex items-center text-sm text-gray-600">
-                        <x-status class="text-sm leading-6 text-gray-900" status="{{ $file->status }}">
+                    <div class="mt-2 flex items-center text-sm">
+                        <x-status class="text-sm leading-6 text-gray-900 dark:text-white" status="{{ $file->status }}">
                             {{ $file->status_label }}
                         </x-status>
                     </div>
-                    <div class="mt-2 flex items-center text-sm text-gray-600">
+                    <div class="mt-2 flex items-center text-sm">
                         <svg class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500" viewBox="0 0 20 20" fill="currentColor"
                             aria-hidden="true">
                             <path fill-rule="evenodd"
@@ -41,30 +41,36 @@
                 </div>
             </div>
 
-            <div class="mt-5 flex lg:ml-4 lg:mt-0">
-
+            <div class="mt-5 flex lg:ml-4 lg:mt-0 items-center gap-2">
                 @if ($file->is_pending)
                     <x-button type="button" wire:click="dispatchFile" spinner>
                         Procesar
                     </x-button>
                 @endif
 
-                <span class="sm:ml-3">
+                @if (auth()->user()->hasRole('develop'))
+                    <x-button type="button" negative  wire:click="delete" spinner icon="trash">
+                        {{ __('Delete') }}
+                    </x-button>
+                @endif
+
+                <span>
                     <a href="{{ $file->file_path }}" target="__blank"
                         class="inline-flex items-center rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                         <x-icon name="download" class="-ml-0.5 mr-1.5 h-5 w-5"></x-icon>
-                        Decargar documento importado
+                        <span class="hidden md:inline-block">Decargar documento importado</span>
+                        <span class="inline-block md:hidden">Documento</span>
                     </a>
                 </span>
             </div>
         </div>
-        <div class="w-full bg-white divide-y divide-gray-100 rounded py-5  px-5">
+        <div class="w-full bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-600 rounded py-5  px-5">
             <div class="w-full text-xl mb-2 pb-1 | flex items-start justify-between">
                 <div class="flex-1">
-                    <span class="flex items-center text-gray-800">
+                    <span class="flex items-center text-gray-800 dark:text-gray-100">
                         Correos enviados
                     </span>
-                    <p class="text-base text-gray-500">
+                    <p class="text-base text-gray-500 dark:text-gray-100">
                         Visualización de cada una de los envios de correos que fueron realizados por el archivo XLSX.
                     </p>
                 </div>
@@ -118,7 +124,7 @@
                 </div>
             @endif
 
-            <ul role="list" class="divide-y divide-gray-100 bg-white rounded">
+            <ul role="list" class="divide-y divide-gray-100 dark:divide-gray-600 bg-white dark:bg-gray-900">
                 @forelse ($excel_emails as $excel_email)
                     <li class="w-full">
                         <x-cards.excel-email :$excel_email :key="$excel_email->id"></x-cards.excel-email>
@@ -128,7 +134,7 @@
                         <div class="flex min-w-0 gap-x-4 items-center">
                             <x-icon name="exclamation" class="h-12 w-12 flex-none text-indigo-200" />
                             <div class="min-w-0 flex-auto">
-                                <p class="mt-1 flex text-xl leading-5 text-gray-500">
+                                <p class="mt-1 flex text-xl leading-5 text-gray-500 dark:text-white">
                                     <span class="relative truncate">
                                         No se encontró correos para este documento de importación
                                     </span>

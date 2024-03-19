@@ -23,6 +23,13 @@ class ImportExcel extends Component
     ])]
     public array $files = [];
 
+    public bool $production = false;
+
+    public function mount ()
+    {
+        $this->production = settings()->get('production', false);
+    }
+
     public function render()
     {
         return view('livewire.import-excel')->layout('layouts.app');

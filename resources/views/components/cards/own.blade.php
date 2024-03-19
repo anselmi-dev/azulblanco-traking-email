@@ -3,7 +3,7 @@
 ])
 
 @if ($own_email)
-    <x-status class="text-sm leading-6 text-gray-900" status="{{ $own_email ? 'done' : 'pending' }}">
+    <x-status class="text-sm leading-6 text-gray-900 | dark:text-white" status="{{ $own_email ? 'done' : 'pending' }}">
         <span class="flex items-center">
             {{--
                 @if ($own_email->opened_at)

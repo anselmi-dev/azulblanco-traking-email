@@ -19,7 +19,7 @@
     x-show="show"
     wireui-modal>
     <div @class([
-            'fixed inset-0 bg-secondary-400 dark:bg-secondary-700 bg-opacity-60',
+            'fixed inset-0 bg-secondary-400 dark:bg-gray-950 bg-opacity-60',
             'dark:bg-opacity-60 transform transition-opacity',
             $blur => (bool) $blur
         ])
@@ -35,7 +35,7 @@
         x-transition:leave-end="opacity-0">
     </div>
 
-    <div class="w-full min-h-full transform flex items-end justify-center mx-auto {{ $align }} {{ $maxWidth }}"
+    <div class="w-full min-h-full transform flex items-center  justify-center mx-auto {{ $align }} {{ $maxWidth }}"
         x-show="show"
         @unless($persistent)
             x-on:click.self="close"
@@ -46,6 +46,8 @@
         x-transition:leave="ease-in duration-200"
         x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
         x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
-        {{ $slot }}
+        <div class="dark:bg-gray-950 bg-white rounded">
+            {{ $slot }}
+        </div>
     </div>
 </div>

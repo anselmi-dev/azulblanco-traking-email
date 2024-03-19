@@ -18,6 +18,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "maatwebsite/excel": "*",
+        "rawilk/laravel-settings": "^3.3",
         "spatie/laravel-permission": "^6.4",
         "spiral/roadrunner-cli": "^2.6.0",
         "spiral/roadrunner-http": "^3.3.0",

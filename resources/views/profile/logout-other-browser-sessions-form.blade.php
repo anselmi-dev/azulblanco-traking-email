@@ -8,7 +8,7 @@
     </x-slot>
 
     <x-slot name="content">
-        <div class="max-w-xl text-sm text-gray-600">
+        <div class="max-w-xl text-sm text-gray-600 dark:text-white">
             {{ __('If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.') }}
         </div>
 
@@ -71,7 +71,7 @@
                 {{ __('Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices.') }}
 
                 <div class="mt-4" x-data="{}" x-on:confirming-logout-other-browser-sessions.window="setTimeout(() => $refs.password.focus(), 250)">
-                    <x-input type="password" class="mt-1 block w-3/4"
+                    <x-input-jetstream  type="password" class="mt-1 block w-3/4"
                                 autocomplete="current-password"
                                 placeholder="{{ __('Password') }}"
                                 x-ref="password"
@@ -87,11 +87,11 @@
                     {{ __('Cancel') }}
                 </x-secondary-button>
 
-                <x-button class="ms-3"
+                <x-button-jetstream class="ms-3"
                             wire:click="logoutOtherBrowserSessions"
                             wire:loading.attr="disabled">
                     {{ __('Log Out Other Browser Sessions') }}
-                </x-button>
+                </x-button-jetstream>
             </x-slot>
         </x-dialog-modal>
     </x-slot>

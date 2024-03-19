@@ -34,6 +34,13 @@ class ExcelFileReview extends Component
         ])->layout('layouts.app');
     }
 
+    public function delete()
+    {
+        $this->file->delete();
+
+        return redirect()->route('dashboard');
+    }
+
     public function dispatchFile()
     {
         ProcessExcelEmailsByFile::dispatch($this->file);

@@ -3,6 +3,7 @@
 use App\Livewire\ExcelFileReview;
 use App\Livewire\ImportExcel;
 use App\Livewire\ReviewEmails;
+use App\Livewire\Settings;
 use App\Models\ExcelEmail;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,8 @@ Route::middleware([
     Route::get('/historial-email/{excel_email}', function (ExcelEmail $excel_email) {
         return (new \App\Mail\PrivateShipped($excel_email))->render();
     })->name('historial.preview.email');
+
+    Route::get('/settings', Settings::class)->name('settings');
 
     Route::get('/historial/{file}', ExcelFileReview::class)->name('historial.preview');
 

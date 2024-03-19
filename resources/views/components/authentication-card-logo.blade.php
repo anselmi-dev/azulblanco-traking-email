@@ -1,3 +1,3 @@
-<a href="{{ route('dashboard') }}">
+<a href="{{ route('dashboard') }}" class="dark:text-white">
     AZULBLANCO
 </a>

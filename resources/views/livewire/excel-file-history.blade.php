@@ -1,23 +1,24 @@
-<div class="w-full bg-white divide-y divide-gray-100 rounded py-5  px-5">
+<div class="w-full bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-600 rounded py-5 px-5">
     <div class="w-full text-2xl mb-2 rounded">
-        <span class="flex items-center text-gray-500">
+        <span class="flex items-center text-gray-500 dark:text-white">
             <x-icon name="clock" class="h-6 w-6"></x-icon>
             Historial de importación
         </span>
-        <p class="text-base text-gray-500">
+        <p class="text-base text-gray-500 dark:text-gray-100">
             Visualización de cada una de las importaciones realizadas a través del archivo XLSX, reflejando así todos los documentos importados en la lista.
         </p>
     </div>
 
     <div class="relative">
         <x-loading wire:loading.class.remove="hidden" class="hidden"/>
-        <ul role="list" class="divide-y divide-gray-100">
+
+        <ul role="list" class="divide-y divide-gray-100 dark:divide-gray-600">
             @foreach ($files as $file)
                 <li class="w-full">
                     <div class="relative flex justify-between gap-x-2 py-4">
                         <div class="relative flex flex-wrap justify-between gap-2 flex-1">
                             <div class="flex sm:flex-1 min-w-0 gap-x-2">
-                                <x-icon name="document-text" class="h-12 w-12 flex-none text-gray-400 hidden sm:flex" />
+                                <x-icons.excel class="h-12 w-12 flex-none text-gray-400 hidden sm:flex" />
                                 <div class="min-w-0 flex-auto">
                                     <p class="text-base font-semibold leading-6 text-gray-900">
                                         <a href="{{ $file->file_path }}" target="__blank" class="text-indigo-500">
@@ -27,7 +28,7 @@
                                             </span>
                                         </a>
                                     </p>
-                                    <p class="mt-1 flex text-base leading-5 text-gray-500">
+                                    <p class="mt-1 flex text-base leading-5 text-gray-500 dark:text-white">
                                         <span class="flex items-center">
                                             <x-icon name="user-circle" class="w-4 h-4 mr-1"></x-icon>
                                             <span class="relative truncate">
@@ -39,10 +40,10 @@
                             </div>
                             <div class="flex sm:flex-1 min-w-0 gap-x-2">
                                 <div class="flex flex-col flex-start justify-start items-start">
-                                    <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center" >
+                                    <p class="mt-1 text-xs leading-5 text-gray-500 dark:text-white flex items-center" >
                                         @if ($file->status != 'pending')
                                             <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
-                                            <span class="bg-gray-100 rounded px-1">
+                                            <span class="bg-gray-100 dark:bg-gray-950 rounded px-1">
                                                 {{ $file->emails->count() }} enviados / {{ $file->excel_emails->count() }} correos
                                             </span>
                                         @else
@@ -57,11 +58,11 @@
                             </div>
                             <div class="flex sm:hidden flex-col sm:items-end">
                                 <div class="text-sm leading-6 text-gray-900 flex items-center">
-                                    <x-status class="text-sm leading-6 text-gray-900" status="{{ $file->status }}">
+                                    <x-status class="text-sm leading-6 text-gray-900 dark:text-white" status="{{ $file->status }}">
                                         {{ $file->status_label }}
                                     </x-status>
                                 </div>
-                                <p class="mt-1 text-xs leading-5 text-gray-500">
+                                <p class="mt-1 text-xs leading-5 text-gray-500 dark:text-white">
                                     Creado el
                                     <time datetime="2023-01-23T13:23Z">{{ $file->created_at->format('Y-m-d h:i') }}</time>
                                 </p>
@@ -70,11 +71,11 @@
                         <div class="flex shrink-0 gap-x-2">
                             <div class="hidden sm:flex sm:flex-col sm:items-end">
                                 <div class="text-sm leading-6 text-gray-900 flex items-center">
-                                    <x-status class="text-sm leading-6 text-gray-900" status="{{ $file->status }}">
+                                    <x-status class="text-sm leading-6 text-gray-900 dark:text-white" status="{{ $file->status }}">
                                         {{ $file->status_label }}
                                     </x-status>
                                 </div>
-                                <p class="mt-1 text-xs leading-5 text-gray-500">
+                                <p class="mt-1 text-xs leading-5 text-gray-500 dark:text-white">
                                     Creado el
                                     <time datetime="2023-01-23T13:23Z">{{ $file->created_at->format('Y-m-d h:i') }}</time>
                                 </p>

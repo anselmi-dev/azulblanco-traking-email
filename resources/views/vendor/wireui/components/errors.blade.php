@@ -1,5 +1,5 @@
 @if ($hasErrors($errors))
-    <div {{ $attributes->merge(['class' => 'rounded-lg bg-negative-50 dark:bg-secondary-800 dark:border dark:border-negative-600 p-4']) }}>
+    <div {{ $attributes->merge(['class' => 'rounded-lg bg-negative-50 dark:bg-transparent dark:border dark:border-negative-600 p-4']) }}>
         <div class="flex items-center pb-3 border-b-2 border-negative-200 dark:border-negative-700">
             <x-dynamic-component
                 :component="WireUi::component('icon')"

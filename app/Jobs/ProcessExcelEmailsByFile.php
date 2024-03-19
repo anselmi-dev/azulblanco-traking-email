@@ -32,7 +32,12 @@ class ProcessExcelEmailsByFile implements ShouldQueue
         foreach ($excel_emails as $key => $excel_email) {
             try {
 
-                \Mail::to('carlosanselmi2@gmail.com')->send(new \App\Mail\PrivateShipped($excel_email));
+                if ($excel_email->own_email)
+                    return;
+
+                $email = app()->environment('production') && settings()->get('production', false) ? $excel_email->email : 'carlos@infinety.es';
+
+                \Mail::to($email)->send(new \App\Mail\PrivateShipped($excel_email));
 
                 $excel_email->status = 'done';
 

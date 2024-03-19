@@ -8,12 +8,12 @@
     <div class="flex justify-between gap-2 md:gap-4">
         <div class="flex flex-1 min-w-0 gap-x-4">
             <div class="min-w-0 flex-auto">
-                <p class="text-base font-semibold leading-6 text-gray-600">
+                <p class="text-base font-semibold leading-6 text-gray-600 | dark:text-white">
                     <span class="flex items-center">
                         <span class="truncate">{{ $excel_email->obra }}</span>
                     </span>
                 </p>
-                <p class="mt-1 flex text-base leading-5 text-gray-500">
+                <p class="mt-1 flex text-base leading-5 text-gray-500 | dark:text-white">
                     <x-icon name="mail" class="h-5 w-5 flex-none hidden sm:flex mr-1" />
                     <span class="relative truncate">
                         {{ $excel_email->email }}
@@ -35,8 +35,8 @@
         </div>
         <div class="flex shrink-0 items-center gap-x-4">
             <div class="hidden sm:flex sm:flex-col sm:items-end">
-                <span class="px-1 rounded ml-1">{{ $excel_email->role }}</span>
-                <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center"
+                <span class="px-1 rounded ml-1 dark:text-white">{{ $excel_email->role }}</span>
+                <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center | dark:text-white"
                     title="Enviado el: {{ $excel_email->created_at->format('Y-m-d') }}">
                     <x-icon name="calendar" class="h-5 w-5 flex-none mr-1" />
                     <span class="mr-1">Enviado el</span>
@@ -44,7 +44,7 @@
                 </p>
             </div>
             <button type="button" @click="show = !show"
-                class="flex items-center px-2 justify-center bg-gray-100 hover:bg-indigo-500 hover:text-white rounded h-full">
+                class="flex items-center px-2 justify-center bg-gray-100 hover:bg-indigo-500 dark:bg-indigo-600 hover:text-white rounded h-full">
                 <svg class="h-5 w-5 flex-none fill-current" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd"
                         d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
@@ -53,11 +53,11 @@
             </button>
         </div>
     </div>
-    <div x-cloak x-show="show" class="relative flex flex-col ustify-between gap-x-6 py-5 px-5 bg-gray-100">
+    <div x-cloak x-show="show" class="relative flex flex-col ustify-between gap-x-6 py-5 px-5 rounded bg-gray-100 | dark:bg-gray-700">
         <div class="flex flex-wrap justify-between mb-2">
             <div class="flex min-w-0 gap-x-2">
                 <div class="min-w-0 flex-auto">
-                    <p class="text-base leading-6 text-gray-500">
+                    <p class="text-base leading-6 text-gray-500 dark:text-white">
                         <span class="flex items-center">
                             <span class="font-semibold mr-1">N. OBRA:</span>
                             <span class="relative truncate">
@@ -65,7 +65,7 @@
                             </span>
                         </span>
                     </p>
-                    <p class="mt-1 flex text-base leading-5 text-gray-500">
+                    <p class="mt-1 flex text-base leading-5 text-gray-500 dark:text-white">
                         <span class="font-semibold mr-1">OBRA: </span>
                         <span class="relative truncate">
                             {{ $excel_email->obra }}
@@ -75,7 +75,7 @@
             </div>
             <div class="flex min-w-0 gap-x-2">
                 <div class="min-w-0 flex-auto">
-                  <p class="text-base leading-6 text-gray-500">
+                  <p class="text-base leading-6 text-gray-500 dark:text-white">
                         <span class="flex items-center">
                             <span class="font-semibold mr-1">DIR-OBRA:</span>
                             <span class="relative truncate">
@@ -83,7 +83,7 @@
                             </span>
                         </span>
                     </p>
-                    <p class="mt-1 flex text-base leading-5 text-gray-500">
+                    <p class="mt-1 flex text-base leading-5 text-gray-500 dark:text-white">
                         <span class="font-semibold mr-1">POBLA_OBRA: </span>
                         <span class="relative truncate">
                             {{ $excel_email->pobla_obra }}
@@ -93,13 +93,13 @@
             </div>
             <div class="flex min-w-0 gap-x-2">
                 <div class="min-w-0 flex-auto">
-                    <p class="mt-1 flex text-base leading-5 text-gray-500">
+                    <p class="mt-1 flex text-base leading-5 text-gray-500  dark:text-white">
                         <span class="font-semibold mr-1">PROVI_OBRA: </span>
                         <span class="relative truncate">
                             {{ $excel_email->provi_obra }}
                         </span>
                     </p>
-                    <p class="mt-1 flex text-base leading-5 text-gray-500">
+                    <p class="mt-1 flex text-base leading-5 text-gray-500  dark:text-white">
                         <span class="font-semibold mr-1">ID: </span>
                         <span class="relative truncate">
                             #{{ $excel_email->id }}

@@ -1,5 +1,22 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    x-data="{
+        darkMode: localStorage.getItem('darkMode') || localStorage.setItem('darkMode', 'system'),
+        toggleDarkMode () {
+            if (this.darkMode == 'dark') {
+                this.darkMode = 'light';
+            } else if (this.darkMode == 'light') {
+                this.darkMode = 'dark';
+            } else {
+                this.darkMode = 'dark';
+            }
+        },
+    }"
+    x-init="
+        $watch('darkMode', val => localStorage.setItem('darkMode', val))
+    "
+    x-bind:class="{'dark': darkMode === 'dark' || (darkMode === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)}"
+>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,15 +32,24 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+        <style>
+            [x-cloak] {
+                display: none;
+            }
+        </style>
+
         <!-- Styles -->
         @livewireStyles
         <wireui:scripts />
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-gray-100 dark:bg-gray-800" x-cloak style=".dark\:bg-gray-800:where(.dark, .dark *) {
+        --tw-bg-opacity: 1;
+        background-color: rgb(31 41 55 / var(--tw-bg-opacity));
+    }">
         <x-banner />
         <x-notifications  position="bottom-center" />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen">
             @livewire('navigation-menu')
 
             <!-- Page Heading -->
