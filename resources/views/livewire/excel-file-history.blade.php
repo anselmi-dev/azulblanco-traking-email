@@ -22,7 +22,7 @@
                                 <div class="min-w-0 flex-auto">
                                     <p class="text-base font-semibold leading-6 text-gray-900">
                                         <a href="{{ $file->file_path }}" target="__blank" class="text-indigo-500">
-                                            <span class="flex items-center">
+                                            <span class="flex">
                                                 <x-icon name="download" class="h-5 w-5 flex-none" />
                                                 {{ $file->original_name }}
                                             </span>
@@ -44,7 +44,7 @@
                                         @if ($file->status != 'pending')
                                             <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
                                             <span class="bg-gray-100 dark:bg-gray-950 rounded px-1">
-                                                {{ $file->emails->count() }} enviados / {{ $file->excel_emails->count() }} correos
+                                                {{ $file->excel_emails()->where('status', 'done')->count() }} enviados / {{ $file->excel_emails->count() }} correos
                                             </span>
                                         @else
                                             <svg class="animate-spin -ml-1 mr-3 h-4 w-4 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

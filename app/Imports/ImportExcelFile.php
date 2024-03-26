@@ -2,22 +2,28 @@
 
 namespace App\Imports;
 
-use App\Models\ExcelEmail;
-use App\Models\ExcelFile;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterImport;
 use Maatwebsite\Excel\Events\ImportFailed;
-use App\Jobs\ProcessExcelEmailsByFile;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
-class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
+use App\Models\ExcelEmail;
+use App\Models\ExcelFile;
+
+class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents, ShouldQueue, WithChunkReading
 {
     public function  __construct(
         public ExcelFile $excelFile,
         protected bool $only_private = true
-    ) { }
+    ) {
+        $excelFile->update([
+            'status' => 'reading'
+        ]);
+    }
 
     public function model(array $row)
     {
@@ -107,7 +113,7 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
         return [
             AfterImport::class => function(AfterImport $event) {
                 $this->excelFile->update([
-                    'status' => 'done'
+                    'status' => 'sending'
                 ]);
             },
             ImportFailed::class => function(ImportFailed $event) {
@@ -120,7 +126,11 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents
 
     public function headingRow(): int
     {
-        return 3;
+        return 1;
     }
 
+    public function chunkSize(): int
+    {
+        return 1000;
+    }
 }

@@ -4,7 +4,7 @@
         <div class="min-w-0 flex-auto">
             <p class="text-base font-semibold leading-6 text-gray-900">
                 <a href="{{ $file->file_path }}" target="__blank" class="text-indigo-500">
-                    <span class="flex items-center">
+                    <span class="flex">
                         <x-icon name="download" class="h-5 w-5 flex-none" />
                         {{ $file->original_name }}
                     </span>

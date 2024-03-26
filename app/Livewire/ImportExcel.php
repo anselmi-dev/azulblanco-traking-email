@@ -9,6 +9,7 @@ use Livewire\Attributes\Validate;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use WireUi\Traits\Actions;
+use App\Imports\ImportExcelFile;
 
 class ImportExcel extends Component
 {
@@ -45,8 +46,10 @@ class ImportExcel extends Component
 
             $_FILENAME = date('Y-m-d') . '/' . $_FILE->hashName();
 
-            $excel_file = auth()->user()->execel_files()->create([
-                'file' => Storage::putFileAs(ExcelFile::DISK, $_FILE, $_FILENAME),
+            $file_path = Storage::putFileAs(ExcelFile::DISK, $_FILE, $_FILENAME);
+
+            auth()->user()->execel_files()->create([
+                'file' => $file_path,
                 'original_name' => optional($file)['name'],
             ]);
         }

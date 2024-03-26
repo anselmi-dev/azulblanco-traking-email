@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Models\ExcelFile;
+use App\Mail\PrivateShipped;
 
 class ProcessExcelEmailsByFile implements ShouldQueue
 {
@@ -37,9 +38,9 @@ class ProcessExcelEmailsByFile implements ShouldQueue
 
                 $email = app()->environment('production') && settings()->get('production', false) ? $excel_email->email : 'anselmi@infinety.es';
 
-                \Mail::to($email)->send(new \App\Mail\PrivateShipped($excel_email));
+                \Mail::to($email)->send(new PrivateShipped($excel_email));
 
-                $excel_email->status = 'done';
+                $excel_email->status = 'sending';
 
                 $excel_email->save();
 
@@ -55,7 +56,7 @@ class ProcessExcelEmailsByFile implements ShouldQueue
         }
 
         $this->excelFile->update([
-            'status' => $this->erros ? 'error' : 'done'
+            'status' => 'done'
         ]);
     }
 }

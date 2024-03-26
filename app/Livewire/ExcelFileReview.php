@@ -15,7 +15,9 @@ class ExcelFileReview extends Component
     public ExcelFile $file;
 
     public $filters = [
-        'status' => ''
+        'search' => '',
+        'status' => '',
+        'role' => ''
     ];
 
     public $no_emails_sent = false;
@@ -28,10 +30,21 @@ class ExcelFileReview extends Component
     public function render()
     {
         return view('livewire.excel-file-review', [
-            'excel_emails' => $this->file->excel_emails()->when($this->filters['status'], function ($query) {
-                $query->where('status', $this->filters['status']);
-            })->with('own_email')->paginate(50)
+            'excel_emails' => $this->file->excel_emails()
+                ->when($this->filters['search'], function ($query) {
+                    $query->where('obra', 'LIKE', "%".$this->filters['search']. '%')
+                        ->orWhere('email', 'LIKE', "%".$this->filters['search']. '%');
+                })->when($this->filters['status'], function ($query) {
+                    $query->where('status', $this->filters['status']);
+                })->when($this->filters['role'], function ($query) {
+                    $query->where('role', $this->filters['role']);
+                })->with('own_email')->paginate(50)
         ])->layout('layouts.app');
+    }
+
+    public function updatingFilters()
+    {
+        $this->resetPage();
     }
 
     public function delete()

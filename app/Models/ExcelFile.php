@@ -87,6 +87,40 @@ class ExcelFile extends Model
         return $this->status === 'pending';
     }
 
+    public function getIsReadingAttribute() : bool
+    {
+        return $this->status === 'reading';
+    }
+
+    public function getIsSentAttribute() : bool
+    {
+        return in_array($this->status, [
+            'sending',
+            'done',
+            'error',
+        ]);
+    }
+
+    public function getIsSendingAttribute() : bool
+    {
+        return $this->status === 'sending';
+    }
+
+    public function getIsProcessedAttribute() : bool
+    {
+        return $this->is_error || $this->is_done;
+    }
+
+    public function getIsErrorAttribute() : bool
+    {
+        return $this->status === 'error';
+    }
+
+    public function getIsDoneAttribute() : bool
+    {
+        return $this->status === 'done';
+    }
+
     public function getStatusLabelAttribute()
     {
         return __('status:'.$this->status);

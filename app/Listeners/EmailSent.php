@@ -5,6 +5,7 @@ namespace App\Listeners;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Models\OwnEmailSentModel;
+use App\Models\ExcelEmail;
 
 class EmailSent
 {
@@ -24,6 +25,10 @@ class EmailSent
         if ($model_id = $event->sent_email->getHeader('X-Model-ID')) {
             OwnEmailSentModel::where('id', $event->sent_email->id)->update([
                 'excel_email_id' => $model_id
+            ]);
+
+            ExcelEmail::where('id', $event->sent_email->id)->update([
+                'status' => 'done'
             ]);
         }
     }

@@ -23,14 +23,7 @@
         </div>
         <div class="flex flex-1 min-w-0 gap-x-4">
             <div class="flex flex-col flex-start justify-start items-start">
-                <x-cards.own :own_email="$own_email"></x-cards.own>
-                {{--
-                    <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center">
-                        <x-icon name="cursor-click" class="h-5 w-5 flex-none mr-1" />
-                        <span class="mr-1">Clicks</span>
-                        <span class="bg-gray-100 rounded px-1">{{ $own_email->clicks }}</span>
-                    </p>
-                --}}
+                <x-cards.own :excel_email="$excel_email"></x-cards.own>
             </div>
         </div>
         <div class="flex shrink-0 items-center gap-x-4">

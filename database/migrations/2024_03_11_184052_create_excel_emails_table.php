@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('original_name');
             $table->enum('status', [
                 "pending",
-                "progress",
+                "reading",
+                "sending",
                 "error",
                 "done",
             ])->default('pending');
@@ -47,6 +48,7 @@ return new class extends Migration
             $table->enum('status', [
                 "pending",
                 "progress",
+                "sending",
                 "error",
                 "done",
             ])->default('pending');
