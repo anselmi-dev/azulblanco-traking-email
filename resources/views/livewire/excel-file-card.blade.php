@@ -3,14 +3,14 @@
         <x-icon name="document-text" class="h-12 w-12 flex-none text-gray-400" />
         <div class="min-w-0 flex-auto">
             <p class="text-base font-semibold leading-6 text-gray-900">
-                <a href="{{ $file->file_path }}" target="__blank" class="text-indigo-500">
+                <a href="{{ $file->file_path }}" target="__blank" class="text-indigo-500 truncate">
                     <span class="flex">
                         <x-icon name="download" class="h-5 w-5 flex-none" />
                         {{ $file->original_name }}
                     </span>
                 </a>
             </p>
-            <p class="mt-1 flex text-base leading-5 text-gray-500">
+            <p class="flex text-base leading-5 text-gray-500">
                 <span class="flex items-center">
                     <x-icon name="user-circle" class="w-4 h-4 mr-1"></x-icon>
                     <span class="relative truncate">
