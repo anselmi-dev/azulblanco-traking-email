@@ -36,7 +36,7 @@
                         <x-errors />
 
                         <div class="w-full  mt-2 pt-2 justify-between flex pb-4">
-                            <x-button href="{{ asset('files/template.xls') }}" dark right-icon="download" target="__blank">
+                            <x-button href="{{ asset('files/template.xlsx') }}" dark right-icon="download" target="__blank">
                                 <span class="hidden sm:flex">{{ __('Descargar plantilla') }}</span>
                             </x-button>
 

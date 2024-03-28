@@ -6,23 +6,23 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\BeforeSheet;
 use Maatwebsite\Excel\Events\AfterImport;
 use Maatwebsite\Excel\Events\ImportFailed;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
+use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
 use App\Models\ExcelEmail;
 use App\Models\ExcelFile;
 
-class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents, ShouldQueue, WithChunkReading
+class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents, ShouldQueue, WithBatchInserts, WithChunkReading
 {
     public function  __construct(
         public ExcelFile $excelFile,
         protected bool $only_private = true
     ) {
-        $excelFile->update([
-            'status' => 'reading'
-        ]);
+
     }
 
     public function model(array $row)
@@ -111,6 +111,11 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents, ShouldQueu
     public function registerEvents(): array
     {
         return [
+            BeforeSheet::class => function(BeforeSheet $event) {
+                $this->excelFile->update([
+                    'status' => 'starting'
+                ]);
+            },
             AfterImport::class => function(AfterImport $event) {
                 $this->excelFile->update([
                     'status' => 'sending'
@@ -127,6 +132,11 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents, ShouldQueu
     public function headingRow(): int
     {
         return 1;
+    }
+
+    public function batchSize(): int
+    {
+        return 1000;
     }
 
     public function chunkSize(): int

@@ -200,6 +200,7 @@
     "You may not leave a team that you created.": "No se puede abandonar un equipo que usted creó.",
     "Your email address is not verified.": "Su dirección de correo electrónico no está verificada.",
     "status:pending": "Pendiente",
+    "status:starting": "Leyendo",
     "status:progress": "Procesando",
     "status:reading": "Procesando",
     "status:sending": "Enviando",

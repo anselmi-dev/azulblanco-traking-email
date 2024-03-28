@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('original_name');
             $table->enum('status', [
                 "pending",
+                "starting",
                 "reading",
                 "sending",
                 "error",

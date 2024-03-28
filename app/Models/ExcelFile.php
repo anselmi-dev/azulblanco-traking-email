@@ -82,9 +82,20 @@ class ExcelFile extends Model
         return Storage::disk($this->DISK)->get($this->file);
     }
 
+    // "pending",
+    // "starting",
+    // "reading",
+    // "sending",
+    // "error",
+    // "done",
     public function getIsPendingAttribute() : bool
     {
         return $this->status === 'pending';
+    }
+
+    public function getIsStartingAttribute() : bool
+    {
+        return $this->status === 'starting';
     }
 
     public function getIsReadingAttribute() : bool
@@ -92,18 +103,33 @@ class ExcelFile extends Model
         return $this->status === 'reading';
     }
 
-    public function getIsSentAttribute() : bool
-    {
-        return in_array($this->status, [
-            'sending',
-            'done',
-            'error',
-        ]);
-    }
-
     public function getIsSendingAttribute() : bool
     {
         return $this->status === 'sending';
+    }
+
+    public function getIsAfterStartingAttribute () : bool {
+        return in_array($this->status, [
+            'reading',
+            'sending',
+            'error',
+            'done',
+        ]);
+    }
+
+    public function getIsAfterReadingAttribute () : bool {
+        return in_array($this->status, [
+            'sending',
+            'error',
+            'done',
+        ]);
+    }
+
+    public function getIsAfterSendingAttribute () : bool {
+        return in_array($this->status, [
+            'error',
+            'done',
+        ]);
     }
 
     public function getIsProcessedAttribute() : bool

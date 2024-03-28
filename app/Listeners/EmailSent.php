@@ -7,7 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use App\Models\OwnEmailSentModel;
 use App\Models\ExcelEmail;
 
-class EmailSent
+class EmailSent implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -27,9 +27,26 @@ class EmailSent
                 'excel_email_id' => $model_id
             ]);
 
-            ExcelEmail::where('id', $event->sent_email->id)->update([
-                'status' => 'done'
-            ]);
+            $excel_email = ExcelEmail::find($model_id);
+
+            if ($excel_email) {
+
+                $excel_email->status = 'done';
+
+                $excel_email->save();
+
+                if ($excel_file = $excel_email->excel_file) {
+                    if (
+                        $excel_file->is_sending
+                        && $excel_file->excel_emails()->where('status', '!=', 'done')->count() == 0
+                    ) {
+                        $excel_file->status = 'done';
+
+                        $excel_file->save();
+
+                    }
+                }
+            }
         }
     }
 }

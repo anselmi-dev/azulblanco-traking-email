@@ -10,6 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Mail\Mailables\Headers;
+use Illuminate\Mail\Events\MessageSent;
 
 class PrivateShipped extends Mailable implements ShouldQueue
 {
@@ -20,7 +21,8 @@ class PrivateShipped extends Mailable implements ShouldQueue
      */
     public function __construct(
         public ExcelEmail $excel_email
-    ) {}
+    ) {
+    }
 
     /**
      * Get the message envelope.

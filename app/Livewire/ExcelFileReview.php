@@ -7,6 +7,7 @@ use App\Models\ExcelFile;
 use Livewire\WithPagination;
 use App\Jobs\ProcessExcelEmailsByFile;
 use WireUi\Traits\Actions;
+use Livewire\Attributes\On;
 
 class ExcelFileReview extends Component
 {
@@ -22,13 +23,10 @@ class ExcelFileReview extends Component
 
     public $no_emails_sent = false;
 
-    public function mount()
-    {
-        $this->no_emails_sent = $this->file->excel_emails()->doesntHave('own_email')->exists();
-    }
-
     public function render()
     {
+        $this->no_emails_sent = $this->file->is_error && $this->file->excel_emails()->doesntHave('own_email')->exists();
+
         return view('livewire.excel-file-review', [
             'excel_emails' => $this->file->excel_emails()
                 ->when($this->filters['search'], function ($query) {
@@ -43,6 +41,12 @@ class ExcelFileReview extends Component
     }
 
     public function updatingFilters()
+    {
+        $this->resetPage();
+    }
+
+    #[On('status-excel-done')]
+    public function refreshComponent()
     {
         $this->resetPage();
     }

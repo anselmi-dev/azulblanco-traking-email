@@ -28,6 +28,10 @@ class ProcessExcelEmailsByFile implements ShouldQueue
      */
     public function handle(): void
     {
+        $this->excelFile->update([
+            'status' => 'sending'
+        ]);
+
         $excel_emails = $this->excelFile->excel_emails()->doesntHave('own_email')->get();
 
         foreach ($excel_emails as $key => $excel_email) {
@@ -36,15 +40,16 @@ class ProcessExcelEmailsByFile implements ShouldQueue
                 if ($excel_email->own_email)
                     return;
 
-                $email = app()->environment('production') && settings()->get('production', false) ? $excel_email->email : 'anselmi@infinety.es';
+                $email = app()->environment('production') && settings()->get('production', false) ? $excel_email->email : settings()->get('email_test', 'carlos@infinety.es');
 
-                \Mail::to($email)->send(new PrivateShipped($excel_email));
+                \Mail::to($email)->later(now()->addSeconds((int) settings()->get('delay', 0)), new PrivateShipped($excel_email));
 
                 $excel_email->status = 'sending';
 
                 $excel_email->save();
 
             } catch (\Throwable $th) {
+
                 report($th);
 
                 $excel_email->status = 'error';
@@ -52,11 +57,16 @@ class ProcessExcelEmailsByFile implements ShouldQueue
                 $excel_email->save();
 
                 $this->erros++;
+
+                $this->excelFile->update([
+                    'status' => 'error'
+                ]);
             }
         }
 
-        $this->excelFile->update([
-            'status' => 'done'
-        ]);
+        if (!$excel_emails->count())
+            $this->excelFile->update([
+                'status' => 'done'
+            ]);
     }
 }
