@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="flex shrink-0 items-center gap-x-2">
+        <div class="flex shrink-0 gap-x-2">
             <div class="flex flex-col sm:items-end flex-1">
                 <span class="dark:px-1 rounded lg:ml-1 dark:text-white">{{ $excel_email->role }}</span>
                 @if ($own_email)

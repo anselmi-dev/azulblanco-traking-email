@@ -50,9 +50,11 @@
                     {{-- @endif --}}
 
                     @if (auth()->user()->hasRole('develop'))
-                        <x-button type="button" negative wire:click="delete" spinner icon="trash">
-                            {{ __('Delete') }}
-                        </x-button>
+                        <div>
+                            <x-button type="button" negative wire:click="delete" spinner icon="trash">
+                                {{ __('Delete') }}
+                            </x-button>
+                        </div>
                     @endif
 
                     <span>
