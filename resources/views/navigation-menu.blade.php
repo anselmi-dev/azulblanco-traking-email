@@ -106,12 +106,16 @@
                                 {{ __('Manage Account') }}
                             </div>
 
-                            <x-dropdown-link href="{{ route('settings') }}">
-                                {{ __('Settings') }}
-                            </x-dropdown-link>
-
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link href="{{ route('review-emails') }}" :active="request()->routeIs('review-emails')">
+                                {{ __('Envios') }}
+                            </x-dropdown-link>
+
+                            <x-dropdown-link href="{{ route('settings') }}">
+                                {{ __('Settings') }}
                             </x-dropdown-link>
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
@@ -174,12 +178,16 @@
                 </x-responsive-nav-link>
 
                 <!-- Account Management -->
-                <x-responsive-nav-link href="{{ route('settings') }}" :active="request()->routeIs('settings')">
-                    {{ __('Settings') }}
-                </x-responsive-nav-link>
-
                 <x-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link href="{{ route('review-emails') }}" :active="request()->routeIs('review-emails')">
+                    {{ __('Envios') }}
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link href="{{ route('settings') }}" :active="request()->routeIs('settings')">
+                    {{ __('Settings') }}
                 </x-responsive-nav-link>
 
                 @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

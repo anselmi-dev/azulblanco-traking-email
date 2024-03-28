@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto px-6 lg:px-8 pt-5">
+<div class="max-w-7xl mx-auto px-4 lg:px-8 pt-5">
     <x-breadcrumbs.container>
         <x-breadcrumbs.item href="{{ route('dashboard') }}">
             Dashboard
@@ -17,11 +17,11 @@
                     Visualización de cada una de los envios de correos que fueron realizados por el archivo XLSX.
                 </p>
             </div>
-            <div class="flex items-end justify-end gap-2 flex-1">
-                <div class="flex-1">
+            <div class="flex flex-col lg:flex-row items-end justify-end gap-2 flex-1">
+                <div class="w-full lg:w-auto flex-1">
                     <x-input wire:model="filters.search" wire:keydown.enter="resetPage" aria-placeholder="Buscar" placeholder="Buscar..."></x-input>
                 </div>
-                <div>
+                <div class="w-full lg:w-auto">
                     <x-native-select placeholder="Buscar por estado" :options="[
                         [
                             'name' => __('status:pending'),
@@ -42,7 +42,7 @@
                     ]" option-label="name"
                         option-value="value" wire:model.live="filters.status" />
                 </div>
-                <div>
+                <div class="w-full lg:w-auto">
                     <x-native-select placeholder="Buscar por rol" :options="[
                             [
                                 'name' => __('ARQUITECTO'),
@@ -73,13 +73,12 @@
                         <x-icon name="exclamation" class="h-12 w-12 flex-none text-indigo-200" />
                         <div class="min-w-0 flex-auto">
                             <p class="mt-1 flex text-xl leading-5 text-gray-500 dark:text-white">
-                                <span class="relative truncate">
+                                <span class="relative">
                                     No se encontró correos para este documento de importación
                                 </span>
                             </p>
                         </div>
                     </div>
-                    <div class="flex shrink-0 items-center gap-x-4"></div>
                 </li>
             @endforelse
         </ul>

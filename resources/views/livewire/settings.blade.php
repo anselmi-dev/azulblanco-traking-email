@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto px-6 lg:px-8 pt-5">
+<div class="max-w-7xl mx-auto px-4 lg:px-8 pt-5">
     <x-breadcrumbs.container>
         <x-breadcrumbs.item href="{{ route('dashboard') }}">
             Dashboard
@@ -8,8 +8,8 @@
         </x-breadcrumbs.item>
     </x-breadcrumbs.container>
     <div class="py-10 w-full">
-        <div class="w-full text-2xl mb-10">
-            <span class="flex items-center text-gray-500 dark:text-white">
+        <div class="w-full text-xl lg:text-2xl mb-10">
+            <span class="flex items-start text-gray-500 dark:text-white">
                 <x-icon name="cog" class="h-10 w-10 mr-1"></x-icon>
                 {{ __('Settings') }}
             </span>

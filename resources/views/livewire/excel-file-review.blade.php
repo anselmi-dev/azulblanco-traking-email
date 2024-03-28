@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto px-6 lg:px-8 pt-5">
+<div class="max-w-7xl mx-auto px-4 lg:px-8 pt-5">
     <x-breadcrumbs.container>
         <x-breadcrumbs.item href="{{ route('dashboard') }}">
             Dashboard
@@ -10,13 +10,13 @@
     <div class="py-12 w-full relative">
         <x-loading wire:loading.class.remove="hidden" class="hidden" />
 
-        <div class="flex flex-col space-y-10 divide-y divide-gray-200 dark:divide-gray-600">
+        <div class="flex flex-col space-y-5 lg:space-y-10 divide-y divide-gray-200 dark:divide-gray-600">
             <div class="lg:flex lg:justify-between text-gray-600 dark:text-white">
                 <div class="min-w-0 flex-1">
                     <h2 class="text-2xl font-bold leading-7 sm:truncate sm:text-3xl sm:tracking-tight truncate">
                         # 00{{ $file->id }} - {{ $file->original_name }}
                     </h2>
-                    <div class="mt-1 flex sm:mt-0 flex-wrap space-x-4 sm:space-x-6">
+                    <div class="mt-1 flex sm:mt-0 flex-wrap gap-x-4 sm:gap-x-6">
                         <div class="mt-2 flex items-center text-sm">
                             <x-icon name="user-circle" class="mr-1.5 h-5 w-5 flex-shrink-0 text-gray-500"></x-icon>
                             {{ optional($file->user)->name }}
@@ -73,7 +73,7 @@
             </div>
 
             <div @class([
-                'w-full bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-600 rounded py-5 px-5',
+                'w-full bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-600 rounded py-5 px-2 lg:px-5',
                 'hidden' => $file->is_pending,
             ])>
                 <div class="w-full flex-col text-xl mb-2 pb-1 | flex space-y-5">
@@ -85,11 +85,11 @@
                             Visualización de cada una de los envios de correos que fueron realizados por el archivo XLSX.
                         </p>
                     </div>
-                    <div class="flex items-end justify-end gap-2 flex-1">
-                        <div class="flex-1">
+                    <div class="flex flex-col lg:flex-row items-end justify-end gap-2 flex-1">
+                        <div class="w-full lg:w-auto flex-1">
                             <x-input wire:model="filters.search" wire:keydown.enter="resetPage" aria-placeholder="Buscar" placeholder="Buscar..."></x-input>
                         </div>
-                        <div>
+                        <div class="w-full lg:w-auto">
                             <x-native-select placeholder="Buscar por estado" :options="[
                                 [
                                     'name' => __('status:pending'),
@@ -110,7 +110,7 @@
                             ]" option-label="name"
                                 option-value="value" wire:model.live="filters.status" />
                         </div>
-                        <div>
+                        <div class="w-full lg:w-auto">
                             <x-native-select placeholder="Buscar por rol" :options="[
                                     [
                                         'name' => __('ARQUITECTO'),
@@ -165,13 +165,12 @@
                                 <x-icon name="exclamation" class="h-12 w-12 flex-none text-indigo-200" />
                                 <div class="min-w-0 flex-auto">
                                     <p class="mt-1 flex text-xl leading-5 text-gray-500 dark:text-white">
-                                        <span class="relative truncate">
+                                        <span class="relative">
                                             No se encontró correos para este documento de importación
                                         </span>
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex shrink-0 items-center gap-x-4"></div>
                         </li>
                     @endforelse
                 </ul>

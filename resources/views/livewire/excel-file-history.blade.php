@@ -1,6 +1,6 @@
 <div class="w-full bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-600 rounded py-5 px-5">
-    <div class="w-full text-2xl mb-2 rounded">
-        <span class="flex items-center text-gray-500 dark:text-white">
+    <div class="w-full text-xl lg:text-2xl mb-2 rounded">
+        <span class="flex items-start text-gray-600 dark:text-white">
             <x-icon name="clock" class="h-6 w-6"></x-icon>
             Historial de importación
         </span>

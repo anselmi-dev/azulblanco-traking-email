@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto px-6 lg:px-8 pt-5">
+<div class="max-w-7xl mx-auto px-4 lg:px-8 pt-5">
     <x-breadcrumbs.container>
         <x-breadcrumbs.item href="{{ route('dashboard') }}">
             Dashboard
@@ -29,7 +29,7 @@
             <div class="max-w-7xl mx-auto">
                 <div class="bg-white dark:bg-gray-950 overflow-hidden shadow-xl sm:rounded-lg">
 
-                    <livewire:dropzone wire:model="files" :rules="['mimes:xls,xlsx', 'max:10420']" :multiple="false" class="w-full" />
+                    <livewire:dropzone wire:model="files" :rules="['mimes:xlsx', 'max:10420']" :multiple="false" class="w-full" />
 
                     <div class="px-4 sm:px-6 lg:px-8 w-full pt-2">
 
