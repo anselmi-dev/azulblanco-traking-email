@@ -35,7 +35,7 @@
                     <p class="mt-1 text-xs leading-5 text-gray-500 flex items-center | dark:text-white">
                         <x-icon name="calendar" class="h-5 w-5 flex-none mr-1" />
                         <span class="mr-1">Enviado el</span>
-                        <time>{{ $own_email->created_at->format('Y-m-d h:i') }}</time>
+                        <time>{{ $own_email->created_at->format('Y-m-d h:i:s') }}</time>
                     </p>
                 @endif
             </div>
