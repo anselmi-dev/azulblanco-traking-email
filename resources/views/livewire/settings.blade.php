@@ -20,8 +20,8 @@
                     <div class="space-y-12 w-full">
                         <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3">
                             <div>
-                                <h2 class="text-lg font-semibold leading-7 text-gray-900">Entorno</h2>
-                                <p class="mt-1 text-sm text-gray-600">
+                                <h2 class="text-lg font-semibold leading-7 text-gray-900 dark:text-white">Entorno</h2>
+                                <p class="mt-1 text-sm text-gray-600 dark:text-white">
                                     Esto significa que los correos electrónicos del documento de Excel serán enviados.
                                 </p>
                             </div>
@@ -37,8 +37,8 @@
                     <div class="space-y-12 w-full">
                         <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3 pt-5">
                             <div>
-                                <h2 class="text-lg font-semibold leading-7 text-gray-900">Correo de pruebas</h2>
-                                <p class="mt-1 text-sm text-gray-600">
+                                <h2 class="text-lg font-semibold leading-7 text-gray-900 dark:text-white">Correo de pruebas</h2>
+                                <p class="mt-1 text-sm text-gray-600 dark:text-white">
                                     Este será el correo de pruebas al que se enviarán todos los correos electrónicos que se generen al procesar el documento.
                                 </p>
                             </div>
@@ -55,8 +55,8 @@
                     <div class="space-y-12 w-full">
                         <div class="grid grid-cols-1 gap-x-8 gap-y-10 border-b border-gray-900/10 pb-12 md:grid-cols-3 pt-5">
                             <div>
-                                <h2 class="text-lg font-semibold leading-7 text-gray-900">Delay</h2>
-                                <p class="mt-1 text-sm text-gray-600">
+                                <h2 class="text-lg font-semibold leading-7 text-gray-900 dark:text-white">Delay</h2>
+                                <p class="mt-1 text-sm text-gray-600 dark:text-white">
                                     Introduce la frecuencia en segundos para el intervalo de tiempo entre cada envío de correo electrónico.
                                 </p>
                             </div>
