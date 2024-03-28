@@ -34,6 +34,8 @@ class ProcessExcelEmailsByFile implements ShouldQueue
 
         $excel_emails = $this->excelFile->excel_emails()->doesntHave('own_email')->get();
 
+        $delay = (int) settings()->get('delay', 0);
+
         foreach ($excel_emails as $key => $excel_email) {
             try {
 
@@ -42,7 +44,7 @@ class ProcessExcelEmailsByFile implements ShouldQueue
 
                 $email = app()->environment('production') && settings()->get('production', false) ? $excel_email->email : settings()->get('email_test', 'carlos@infinety.es');
 
-                \Mail::to($email)->later(now()->addSeconds((int) settings()->get('delay', 0)), new PrivateShipped($excel_email));
+                \Mail::to($email)->later(now()->addSeconds($delay), new PrivateShipped($excel_email));
 
                 $excel_email->status = 'sending';
 
@@ -62,6 +64,8 @@ class ProcessExcelEmailsByFile implements ShouldQueue
                     'status' => 'error'
                 ]);
             }
+
+            $delay = $delay + $delay;
         }
 
         if (!$excel_emails->count())
