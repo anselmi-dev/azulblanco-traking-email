@@ -16,7 +16,7 @@
             @foreach ($files as $file)
                 <li class="w-full">
                     <div class="relative flex justify-between gap-x-2 py-4">
-                        <div class="relative flex flex-wrap justify-between gap-2 flex-1">
+                        <div class="relative flex flex-wrap justify-between gap-2 flex-1 truncate max-w-full">
                             <div class="flex sm:flex-1 min-w-0 gap-x-2">
                                 <x-icons.excel class="h-12 w-12 flex-none text-gray-400 hidden sm:flex" />
                                 <div class="min-w-0 flex-auto">
