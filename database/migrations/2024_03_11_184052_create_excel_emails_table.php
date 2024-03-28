@@ -27,7 +27,8 @@ return new class extends Migration
                 "done",
             ])->default('pending');
             $table->string('file');
-            $table->json('message')->default(new Expression('(JSON_ARRAY())'));
+            // $table->json('message')->default(new Expression('(JSON_ARRAY())'));
+            $table->longText('message')->default('[]');
             $table->timestamps();
         });
 
@@ -53,7 +54,8 @@ return new class extends Migration
                 "error",
                 "done",
             ])->default('pending');
-            $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            // $table->json('data')->default(new Expression('(JSON_ARRAY())'));
+            $table->longText('data')->default('[]');
             $table->timestamps();
         });
     }
