@@ -38,7 +38,7 @@ class Settings extends Component
 
         settings()->set('email_test', $this->email_test);
 
-        Artisan::call('queue:restar');
+        Artisan::call('queue:restart');
 
         $this->notification()->success(
             __('Los cambios han sido guardados exitosamente.'),
