@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use WireUi\Traits\Actions;
+use Illuminate\Support\Facades\Artisan;
 
 class Settings extends Component
 {
@@ -36,6 +37,8 @@ class Settings extends Component
         settings()->set('delay', $this->delay);
 
         settings()->set('email_test', $this->email_test);
+
+        Artisan::call('queue:restar');
 
         $this->notification()->success(
             __('Los cambios han sido guardados exitosamente.'),
