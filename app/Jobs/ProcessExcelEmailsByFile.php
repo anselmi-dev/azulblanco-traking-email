@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Queue\SerializesModels;
 use App\Models\ExcelFile;
 use App\Mail\PrivateShipped;
@@ -46,7 +47,7 @@ class ProcessExcelEmailsByFile implements ShouldQueue
 
                 $email = app()->environment('production') && settings()->get('production', false) ? $excel_email->email : settings()->get('email_test', 'carlos@infinety.es');
 
-                \Mail::to($email)->later(now()->addSeconds($seconds), new PrivateShipped($excel_email));
+                Mail::to($email)->later(now()->addSeconds($seconds), new PrivateShipped($excel_email));
 
                 $excel_email->status = 'sending';
 

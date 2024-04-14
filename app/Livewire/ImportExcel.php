@@ -9,7 +9,6 @@ use Livewire\Attributes\Validate;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use WireUi\Traits\Actions;
-use App\Imports\ImportExcelFile;
 
 class ImportExcel extends Component
 {

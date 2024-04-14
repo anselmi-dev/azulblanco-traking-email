@@ -13,7 +13,7 @@ class ExcelFileReview extends Component
 {
     use WithPagination, Actions;
 
-    public ExcelFile $file;
+    public ExcelFile $file_excel;
 
     public $filters = [
         'search' => '',
@@ -25,10 +25,10 @@ class ExcelFileReview extends Component
 
     public function render()
     {
-        $this->no_emails_sent = $this->file->is_error && $this->file->excel_emails()->doesntHave('own_email')->exists();
+        $this->no_emails_sent = $this->file_excel->is_error && $this->file_excel->excel_emails()->doesntHave('own_email')->exists();
 
         return view('livewire.excel-file-review', [
-            'excel_emails' => $this->file->excel_emails()
+            'excel_emails' => $this->file_excel->excel_emails()
                 ->when($this->filters['search'], function ($query) {
                     $query->where('obra', 'LIKE', "%".$this->filters['search']. '%')
                         ->orWhere('email', 'LIKE', "%".$this->filters['search']. '%');
@@ -53,14 +53,14 @@ class ExcelFileReview extends Component
 
     public function delete()
     {
-        $this->file->delete();
+        $this->file_excel->delete();
 
         return redirect()->route('dashboard');
     }
 
     public function dispatchFile()
     {
-        ProcessExcelEmailsByFile::dispatch($this->file);
+        ProcessExcelEmailsByFile::dispatch($this->file_excel);
 
         $this->no_emails_sent = false;
 

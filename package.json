@@ -16,6 +16,8 @@
         "vite": "^5.0.0"
     },
     "dependencies": {
-        "@dasundev/livewire-dropzone-styles": "^1.0.3"
+        "@dasundev/livewire-dropzone-styles": "^1.0.3",
+        "@ryangjchandler/alpine-clipboard": "^2.3.0",
+        "@ryangjchandler/alpine-tooltip": "^2.0.0"
     }
 }

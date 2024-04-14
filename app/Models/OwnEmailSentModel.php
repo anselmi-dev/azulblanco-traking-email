@@ -9,9 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OwnEmailSentModel extends Model implements SentEmailModel {
 
-    protected $table = 'sent_emails';
-
     use IsSentEmailModel;
+
+    protected $table = 'sent_emails';
 
     protected static $unguarded = true;
 

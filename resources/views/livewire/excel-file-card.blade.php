@@ -32,7 +32,7 @@
                 <time datetime="2023-01-23T13:23Z">{{ $file->created_at->format('Y-m-d h:i') }}</time>
             </p>
         </div>
-        <a href="{{ route('historial.preview', ['file' => $file->id]) }}" class="flex items-center px-2 justify-center bg-gray-100 hover:bg-indigo-500 hover:text-white rounded h-full">
+        <a href="{{ route('historial.preview', ['file_excel' => $file->id_encrypt]) }}" class="flex items-center px-2 justify-center bg-gray-100 hover:bg-indigo-500 hover:text-white rounded h-full">
             <svg class="h-5 w-5 flex-none fill-current" viewBox="0 0 20 20" fill="currentColor"
                 aria-hidden="true">
                 <path fill-rule="evenodd"

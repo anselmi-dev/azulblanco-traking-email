@@ -12,11 +12,14 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\Storage;
 use App\Observers\ExcelFileObserver;
 use App\Models\OwnEmailSentModel;
+use App\Traits\RouteBindCrypt;
 
 #[ObservedBy([ExcelFileObserver::class])]
 class ExcelFile extends Model
 {
     use HasFactory;
+
+    use RouteBindCrypt;
 
     const DISK = 'public';
 
@@ -71,7 +74,8 @@ class ExcelFile extends Model
      */
     public function getFilePathAttribute()
     {
-        return Storage::disk($this->DISK)->url($this->file);
+        return route('file.download', ['file_excel' => $this->id_encrypt]);
+        // return Storage::disk($this->DISK)->url($this->file);
     }
 
     /**

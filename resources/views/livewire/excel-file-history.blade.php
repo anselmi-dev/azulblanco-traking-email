@@ -21,15 +21,17 @@
                                 <x-icons.excel class="h-12 w-12 flex-none text-gray-400 hidden sm:flex" />
                                 <div class="min-w-0 flex-auto">
                                     <p class="text-base font-semibold leading-6 text-gray-900 truncate">
-                                        <a href="{{ $file->file_path }}" target="__blank" class="text-indigo-500">
+                                        {{-- <a href="{{ $file->file_path }}" target="__blank" class="text-indigo-500"> --}}
+                                        <a href="{{ route('historial.preview', ['file_excel' => $file->id_encrypt]) }}" class="text-indigo-500">
                                             <span class="flex">
-                                                <x-icon name="download" class="h-5 w-5 flex-none" />
-                                                {{ $file->original_name }}
+                                                <x-icons.excel class="h-5 w-5 min-w-5 flex-nonesm:hidden" />
+                                                {{-- <x-icon name="download" class="h-5 w-5 flex-none" /> --}}
+                                                <span class="truncate">{{ $file->original_name }}</span>
                                             </span>
                                         </a>
                                     </p>
                                     <p class="flex text-base leading-5 text-gray-500 dark:text-white">
-                                        <span class="flex items-center">
+                                        <span class="flex items-center" x-data x-tooltip.raw="Usuario que ha enviado el documento .xlsx para su procesamiento.">
                                             <x-icon name="user-circle" class="w-4 h-4 mr-1"></x-icon>
                                             <span class="relative truncate">
                                                 {{ optional($file->user)->name }}
@@ -40,11 +42,13 @@
                             </div>
                             <div class="flex sm:flex-1 min-w-0 gap-x-2">
                                 <div class="flex flex-col flex-start justify-start items-start">
-                                    <p class="mt-1 text-xs leading-5 text-gray-500 dark:text-white flex items-center" >
+                                    <p class="text-xs leading-5 text-gray-500 dark:text-white flex items-center">
                                         @if ($file->status != 'pending')
-                                            <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
-                                            <span class="bg-gray-100 dark:bg-gray-950 rounded px-1">
-                                                {{ $file->excel_emails()->where('status', 'done')->count() }} enviados / {{ $file->excel_emails->count() }} correos
+                                            <span class="flex" x-data x-tooltip.raw="Total de emails enviados / Totales de emails a enviar">
+                                                <x-icon name="mail" class="h-5 w-5 flex-none mr-1" />
+                                                <span class="bg-gray-100 dark:bg-gray-950 rounded px-1">
+                                                    {{ $file->excel_emails()->where('status', 'done')->count() }} enviados / {{ $file->excel_emails->count() }} correos
+                                                </span>
                                             </span>
                                         @else
                                             <svg class="animate-spin -ml-1 mr-3 h-4 w-4 text-indigo-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -80,7 +84,7 @@
                                     <time datetime="2023-01-23T13:23Z">{{ $file->created_at->format('Y-m-d h:i') }}</time>
                                 </p>
                             </div>
-                            <a href="{{ route('historial.preview', ['file' => $file->id]) }}" class="flex items-center px-2 justify-center bg-gray-100 hover:bg-indigo-500 hover:text-white rounded h-full">
+                            <a href="{{ route('historial.preview', ['file_excel' => $file->id_encrypt]) }}" class="flex items-center px-2 justify-center bg-gray-100 hover:bg-indigo-500 hover:text-white rounded h-full">
                                 <svg class="h-5 w-5 flex-none fill-current" viewBox="0 0 20 20" fill="currentColor"
                                     aria-hidden="true">
                                     <path fill-rule="evenodd"

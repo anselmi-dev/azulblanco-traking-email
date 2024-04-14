@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\ExcelFile;
 use App\Imports\ImportExcelFile;
 use App\Jobs\ProcessExcelEmailsByFile;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExcelFileObserver
 {
@@ -13,7 +14,7 @@ class ExcelFileObserver
      */
     public function created(ExcelFile $excelFile): void
     {
-        \Excel::queueImport(new ImportExcelFile($excelFile), public_path($excelFile->file_path));
+        Excel::queueImport(new ImportExcelFile($excelFile), $excelFile->file);
     }
 
     /**

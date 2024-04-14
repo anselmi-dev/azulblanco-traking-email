@@ -5,6 +5,7 @@ use App\Livewire\ImportExcel;
 use App\Livewire\ReviewEmails;
 use App\Livewire\Settings;
 use App\Models\ExcelEmail;
+use App\Http\Controllers\DownloadFileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,7 +31,9 @@ Route::middleware([
 
     Route::get('/settings', Settings::class)->name('settings');
 
-    Route::get('/historial/{file}', ExcelFileReview::class)->name('historial.preview');
+    Route::get('/historial/{file_excel}', ExcelFileReview::class)->name('historial.preview');
+
+    Route::get('/download/file/{file_excel}', DownloadFileController::class)->name('file.download');
 
     Route::get('/review-emails', ReviewEmails::class)->name('review-emails');
 
