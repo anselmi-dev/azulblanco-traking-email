@@ -131,7 +131,7 @@ class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents, ShouldQueu
 
     public function headingRow(): int
     {
-        return 1;
+        return settings()->get('heading_row', 1);
     }
 
     public function batchSize(): int

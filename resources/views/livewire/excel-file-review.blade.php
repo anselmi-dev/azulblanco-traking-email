@@ -75,7 +75,7 @@
             </div>
 
             <div @class([
-                'w-full bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-600 rounded py-5 px-2 lg:px-5',
+                'w-full bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-600 rounded px-2 py-5 lg:px-5',
                 'hidden' => $file_excel->is_pending,
             ])>
                 <div class="w-full flex-col text-xl mb-2 pb-1 | flex space-y-5">
@@ -156,7 +156,7 @@
                     </div>
                 @endif
 
-                <ul role="list" class="divide-y divide-gray-100 dark:divide-gray-600 bg-white dark:bg-gray-900">
+                <ul role="list" class="divide-y divide-gray-100 dark:divide-gray-600">
                     @forelse ($excel_emails as $excel_email)
                         <li class="w-full">
                             <x-cards.excel-email :$excel_email :key="$excel_email->id"></x-cards.excel-email>

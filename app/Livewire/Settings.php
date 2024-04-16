@@ -14,6 +14,8 @@ class Settings extends Component
 
     public int $delay;
 
+    public int $heading_row;
+
     public string $email_test;
 
     public function mount ()
@@ -21,6 +23,8 @@ class Settings extends Component
         $this->production = settings()->get('production', false);
 
         $this->delay = settings()->get('delay', 0);
+
+        $this->heading_row = settings()->get('heading_row', 1);
 
         $this->email_test = settings()->get('email_test', 'carlos@infinety.es');
     }
@@ -37,6 +41,8 @@ class Settings extends Component
         settings()->set('delay', $this->delay);
 
         settings()->set('email_test', $this->email_test);
+
+        settings()->set('heading_row', $this->heading_row);
 
         Artisan::call('queue:restart');
 

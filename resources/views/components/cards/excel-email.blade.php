@@ -4,14 +4,15 @@
     $own_email = $excel_email->own_email;
 @endphp
 
-<div class="w-full relative gap-x-2 py-5 px-2 md:gap-x-6 flex flex-col space-y-5" x-data="{ show: false }">
+<div class="w-full relative gap-x-2 py-5 md:gap-x-6 flex flex-col space-y-5" x-data="{ show: false }">
     <div class="flex justify-between gap-2 md:gap-4 flex-col md:flex-row">
         <div class="flex justify-between gap-2 md:gap-4 lg:flex-1">
             <div class="flex flex-1 min-w-0 gap-x-2">
                 <div class="min-w-0 flex-auto">
                     <p class="text-base font-semibold text-gray-600 | dark:text-white">
                         <span class="flex items-center">
-                            <span class="truncate">{{ $excel_email->obra }}</span>
+                            <span class="hidden md:block">{{ $excel_email->obra }}</span>
+                            <span class="block md:hidden truncate">{{ $excel_email->obra }}</span>
                         </span>
                     </p>
                     <p class="mt-1 flex text-base leading-5 text-gray-500 | dark:text-white">

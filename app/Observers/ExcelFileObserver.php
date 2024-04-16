@@ -14,7 +14,7 @@ class ExcelFileObserver
      */
     public function created(ExcelFile $excelFile): void
     {
-        Excel::queueImport(new ImportExcelFile($excelFile), $excelFile->file);
+        Excel::queueImport(new ImportExcelFile($excelFile), $excelFile->file, null, $this->getFormatExcel($excelFile->file));
     }
 
     /**
@@ -27,4 +27,14 @@ class ExcelFileObserver
         }
     }
 
+    protected function getFormatExcel (string $file)
+    {
+        if (strpos($file, '.xlsx'))
+            return \Maatwebsite\Excel\Excel::XLSX;
+
+        else if (strpos($file, '.xls'))
+            return \Maatwebsite\Excel\Excel::XLS;
+
+        return null;
+    }
 }
