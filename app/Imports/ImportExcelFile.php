@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Concerns\WithBatchInserts;
 use App\Models\ExcelEmail;
 use App\Models\ExcelFile;
 
-class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents, ShouldQueue, WithBatchInserts, WithChunkReading
+class ImportExcelFile implements ToModel, WithHeadingRow, WithEvents, WithBatchInserts, WithChunkReading
 {
     public function  __construct(
         public ExcelFile $excelFile,
